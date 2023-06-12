@@ -185,6 +185,124 @@ public final class Board
 
 
   /**
+   * Row/column chance.
+   *
+   * @param token Token
+   * @param row Row
+   * @return chance: 0-2
+   */
+  private int rowColumnChance(final char token, final int row, final int column)
+   {
+    final char fieldToken = this.board[row][column];
+    if (fieldToken == ' ')
+     {
+      return 1;
+     }
+    else if (fieldToken == token)
+     {
+       return 2;
+     }
+    return 0;
+   }
+
+
+  /**
+   * Get horizontal chance.
+   *
+   * @param token Token
+   * @param row Row
+   * @param column Column
+   * @return Chance
+   */
+  private int horizontalChance(final char token, final int row, final int column)
+   {
+    // Horizontal row     column 1-3
+    final int column0 = rowColumnChance(token, row, 0);
+    final int column1 = rowColumnChance(token, row, 1);
+    final int column2 = rowColumnChance(token, row, 2);
+    final int bonus = ((column0 + column1 + column2) == 5) ? 10 : 0;
+    if ((column0 > 0) && (column1 > 0) && (column2 > 0))
+     {
+      return column0 + column1 + column2 + bonus;
+     }
+    return 0;
+   }
+
+
+  /**
+   * Get vertical chance.
+   *
+   * @param token Token
+   * @param row Row
+   * @param column Column
+   * @return Chance
+   */
+  private int verticalChance(final char token, final int row, final int column)
+   {
+    // Vertical   column  row=1-3
+    final int row0 = rowColumnChance(token, 0, column);
+    final int row1 = rowColumnChance(token, 1, column);
+    final int row2 = rowColumnChance(token, 2, column);
+    final int bonus = ((row0 + row1 + row2) == 5) ? 10 : 0;
+    if ((row0 > 0) && (row1 > 0) && (row2 > 0))
+     {
+      return row0 + row1 + row2 + bonus;
+     }
+    return 0;
+   }
+
+
+  /**
+   * Get diagonalTopLeftToBottomRight chance.
+   *
+   * @param token Token
+   * @param row Row
+   * @param column Column
+   * @return Chance
+   */
+  private int diagonalTopLeftToBottomRight(final char token, final int row, final int column)
+   {
+    if (((row == 1) && (column == 1)) || ((row == 0) &&  (column == 0)) || ((row == 2) && (column == 2)))
+     {
+      final int topLeft = rowColumnChance(token, 0, 0);
+      final int middle = rowColumnChance(token, 1, 1);
+      final int bottomRight = rowColumnChance(token, 2, 2);
+      final int bonus = ((topLeft + middle + bottomRight) == 5) ? 10 : 0;
+      if ((topLeft > 0) && (middle > 0) && (bottomRight > 0))
+       {
+        return topLeft + middle + bottomRight + bonus;
+       }
+     }
+    return 0;
+   }
+
+
+  /**
+   * Get diagonalTopRightToBottomLeft chance.
+   *
+   * @param token Token
+   * @param row Row
+   * @param column Column
+   * @return Chance
+   */
+  private int diagonalTopRightToBottomLeft(final char token, final int row, final int column)
+   {
+    if (((row == 1) && (column == 1)) || ((row == 0) && (column == 2)) || ((row == 2) && (column == 0)))
+     {
+      final int topRight = rowColumnChance(token, 0, 2);
+      final int middle = rowColumnChance(token, 1, 1);
+      final int bottomLeft = rowColumnChance(token, 2, 0);
+      final int bonus = ((topRight + middle + bottomLeft) == 5) ? 10 : 0;
+      if ((topRight > 0) && (middle > 0) && (bottomLeft > 0))
+       {
+        return topRight + middle + bottomLeft + bonus;
+       }
+     }
+    return 0;
+   }
+
+
+  /**
    * Field chance for 3 of given token for empty field
    *
    * @param position Board position
@@ -200,32 +318,31 @@ public final class Board
     int chance = 0;
     final int row = position.getRow() - 1;
     final int column = position.getColumn() - 1;
-    // Horizontal row     column 1-3
-    if (((this.board[row][0] == ' ') || (this.board[row][0] == token)) && ((this.board[row][1] == ' ') || (this.board[row][1] == token)) && ((this.board[row][2] == ' ') || (this.board[row][2] == token)))
-     {
-      ++chance;
-     }
-    // Vertical   column  row=1-3
-    if (((this.board[0][column] == ' ') || (this.board[0][column] == token)) && ((this.board[1][column] == ' ') || (this.board[1][column] == token)) && ((this.board[2][column] == ' ') || (this.board[2][column] == token)))
-     {
-      ++chance;
-     }
-    // Diagonal? 1,1 0,0 2,2;  1,1 0,2 2,0
-    if (((row == 1) && (column == 1)) || ((row == 0) && (column == 0)) || ((row == 2) && (column == 2)))
-     {
-      if ((this.board[1][1] == ' ') || ((this.board[1][1] == token) && (this.board[0][0] == ' ')) || ((this.board[0][0] == token) && (this.board[2][2] == ' ')) || (this.board[2][2] == token))
-       {
-        ++chance;
-       }
-     }
-    if (((row == 1) && (column == 1)) || ((row == 0) && (column == 2)) || ((row == 2) && (column == 0)))
-     {
-      if ((this.board[1][1] == ' ') || ((this.board[1][1] == token) && (this.board[0][2] == ' ')) || ((this.board[0][2] == token) && (this.board[2][0] == ' ')) || (this.board[2][0] == token))
-       {
-        ++chance;
-       }
-     }
+    chance += horizontalChance(token, row, column);
+    chance += verticalChance(token, row, column);
+    chance += diagonalTopLeftToBottomRight(token, row, column);
+    chance += diagonalTopRightToBottomLeft(token, row, column);
     return chance;
+   }
+
+
+  /**
+   * Get opposite token.
+   *
+   * @param token Token X, O, ' '
+   * @return Opposite token X, O, ' '
+   */
+  public char getOppositeToken(final char token)
+   {
+    switch (token)
+     {
+      case 'X':
+        return 'O';
+      case 'O':
+        return 'X';
+      default:
+        return ' ';
+     }
    }
 
 
@@ -283,6 +400,8 @@ public final class Board
    *
    * @return String representation of this Board
    * @see java.lang.Object#toString()
+   *
+   * TODO Color if 3 in a row, column or diagonal
    */
   @Override
   public String toString()

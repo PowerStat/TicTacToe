@@ -59,6 +59,7 @@ public class TicTacToe
       if (board.detectWin())
        {
         System.out.println(player1.getName() + " wins!");
+        System.out.println(board.toString());
         return;
        }
       System.out.println(board.toString());
@@ -69,10 +70,12 @@ public class TicTacToe
         if (board.detectWin())
          {
           System.out.println(player2.getName() + " wins!");
+          System.out.println(board.toString());
           return;
          }
        }
      }
+    System.out.println(board.toString());
     System.out.println("Standoff");
    }
 
