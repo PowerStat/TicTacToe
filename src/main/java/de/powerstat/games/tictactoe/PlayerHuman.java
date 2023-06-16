@@ -25,7 +25,7 @@ public class PlayerHuman implements IPlayer
   /**
    * Token.
    */
-  private final char token;
+  private final Token token;
 
 
   /**
@@ -34,13 +34,13 @@ public class PlayerHuman implements IPlayer
    * @param name Player name
    * @param token Token X/O
    */
-  public PlayerHuman(final String name, final char token)
+  public PlayerHuman(final String name, final Token token)
    {
     super();
     Objects.requireNonNull(name, "name"); //$NON-NLS-1$
     // Max length
     // Regexp
-    if ((token != 'X') && (token != 'O'))
+    if ((token.charValue() != 'X') && (token.charValue() != 'O'))
      {
       throw new IllegalArgumentException("Tokn must be X or O");
      }

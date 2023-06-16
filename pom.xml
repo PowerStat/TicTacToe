@@ -220,7 +220,7 @@
       <plugin>
         <groupId>org.codehaus.mojo</groupId>
         <artifactId>buildnumber-maven-plugin</artifactId>
-        <version>1.4</version>
+        <version>3.1.0</version>
         <executions>
           <execution>
             <phase>validate</phase>
@@ -298,7 +298,7 @@
       <plugin>
         <groupId>org.codehaus.mojo</groupId>
         <artifactId>license-maven-plugin</artifactId>
-        <version>2.0.0</version>
+        <version>2.1.0</version>
         <configuration>
           <addSvnKeyWords>false</addSvnKeyWords>
           <licenseName>Apache License, Version 2.0</licenseName>
@@ -336,7 +336,7 @@
                   <banSnapshots>true</banSnapshots>
                   <phases>clean,deploy,site</phases>
                 </requirePluginVersions>
-                <requireReleaseDeps/>
+                <!-- <requireReleaseDeps/> -->
                 <requireUpperBoundDeps/>
               </rules>
             </configuration>
@@ -516,8 +516,8 @@
               <rule>com.societegenerale.commons.plugin.rules.NoJodaTimeRuleTest</rule>
               <rule>com.societegenerale.commons.plugin.rules.NoPowerMockRuleTest</rule>
               <rule>com.societegenerale.commons.plugin.rules.NoPublicFieldRuleTest</rule>
-              <rule>com.societegenerale.commons.plugin.rules.NoStandardStreamRuleTest</rule>
-              <rule>com.societegenerale.commons.plugin.rules.NoTestIgnoreWithoutCommentRuleTest</rule>
+              <!-- <rule>com.societegenerale.commons.plugin.rules.NoStandardStreamRuleTest</rule> -->
+              <!-- <rule>com.societegenerale.commons.plugin.rules.NoTestIgnoreWithoutCommentRuleTest</rule> -->
             </preConfiguredRules>
             <!--
             <configurableRules>

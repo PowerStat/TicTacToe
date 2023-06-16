@@ -9,6 +9,9 @@ import java.util.Random;
 
 /**
  * Tic Tac Toe main game.
+ *
+ * TODO Replay
+ * TODO Hexagonal Architecture
  */
 public class TicTacToe
  {
@@ -25,16 +28,16 @@ public class TicTacToe
     switch (args.length)
      {
       case 0: // AI vs AI
-        playerA = new PlayerAI("AI1", 'X');
-        playerB = new PlayerAI("AI2", 'O');
+        playerA = new PlayerAI("AI1", Token.of('X'));
+        playerB = new PlayerAI("AI2", Token.of('O'));
         break;
       case 1: // Human vs AI
-        playerA = new PlayerHuman(args[0], 'X');
-        playerB = new PlayerAI("AI", 'O');
+        playerA = new PlayerHuman(args[0], Token.of('X'));
+        playerB = new PlayerAI("AI", Token.of('O'));
         break;
       case 2: // Human vs Human
-        playerA = new PlayerHuman(args[0], 'X');
-        playerB = new PlayerHuman(args[1], 'O');
+        playerA = new PlayerHuman(args[0], Token.of('X'));
+        playerB = new PlayerHuman(args[1], Token.of('O'));
         break;
       default:
         System.out.println("TicTacToe [Name player 1 [Name player 2]]");
@@ -42,7 +45,7 @@ public class TicTacToe
      }
 
     // Init board
-    final Board board = new Board();
+    final Board board = new Board(new History());
 
     // Random start player
     final Random random = new Random();

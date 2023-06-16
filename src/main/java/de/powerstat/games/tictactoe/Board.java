@@ -5,6 +5,7 @@ package de.powerstat.games.tictactoe;
 
 
 import java.util.Arrays;
+import java.util.Objects;
 
 
 /**
@@ -17,24 +18,28 @@ import java.util.Arrays;
 public final class Board
  {
   /**
-   * Field chance.
-   */
-  private static final int[][] FIELD_CHANCE = {{3, 2, 3}, {2, 4, 2}, {3, 2, 3}};
-
-  /**
    * Board array 3x3.
    *
    * Space means empty field, otherwise X/O per player.
    */
-  private final char[][] board = {{' ', ' ', ' '}, {' ', ' ', ' '}, {' ', ' ', ' '}};
+  private final Token[][] board = {{Token.of(' '), Token.of(' '), Token.of(' ')}, {Token.of(' '), Token.of(' '), Token.of(' ')}, {Token.of(' '), Token.of(' '), Token.of(' ')}};
+
+  /**
+   * History.
+   */
+  private final IHistory history;
 
 
   /**
-   * Default constructor.
+   * Constructor.
+   *
+   * @param history History
    */
-  public Board()
+  public Board(final IHistory history)
    {
     super();
+    Objects.requireNonNull(history, "history"); //$NON-NLS-1$
+    this.history = history;
    }
 
 
@@ -43,11 +48,11 @@ public final class Board
    */
   public void clear()
    {
-    for (final char[] row : this.board)
+    for (final Token[] row : this.board)
      {
-      for (char column : row)
+      for (Token column : row)
        {
-        column = ' ';
+        column = Token.of(' ');
        }
      }
    }
@@ -59,9 +64,9 @@ public final class Board
    * @param src Source array.
    * @return Cloned array
    */
-  private static char[][] cloneArray(final char[][] src)
+  private static Token[][] cloneArray(final Token[][] src)
    {
-    final char[][] target = new char[src.length][src[0].length];
+    final Token[][] target = new Token[src.length][src[0].length];
     for (int i = 0; i < src.length; ++i)
      {
       System.arraycopy(src[i], 0, target[i], 0, src[i].length);
@@ -75,23 +80,9 @@ public final class Board
    *
    * @return Copy of board array 3x3
    */
-  public char[][] getBoard()
+  public Token[][] getBoard()
    {
     return cloneArray(this.board);
-   }
-
-
-  /**
-   * Is position empty.
-   *
-   * @param position Position on board
-   * @return true: if empty, false otherwise
-   */
-  private boolean isPositionEmpty(final Coordinate position)
-   {
-    final int row = position.getRow() - 1;
-    final int column = position.getColumn() - 1;
-    return this.board[row][column] == ' ';
    }
 
 
@@ -101,11 +92,23 @@ public final class Board
    * @param position Position on board
    * @return Token on position X, O, ' '
    */
-  private char getToken(final Coordinate position)
+  private Token getToken(final Coordinate position)
    {
     final int row = position.getRow() - 1;
     final int column = position.getColumn() - 1;
     return this.board[row][column];
+   }
+
+
+  /**
+   * Is position empty.
+   *
+   * @param position Position on board
+   * @return true: if empty, false otherwise
+   */
+  public boolean isPositionEmpty(final Coordinate position)
+   {
+    return Token.of(' ').equals(getToken(position));
    }
 
 
@@ -117,9 +120,9 @@ public final class Board
    * @return Successfully set
    * @throws IllegalStateException when the token is not X or O.
    */
-  public boolean setField(final Coordinate position, final char token)
+  public boolean setField(final Coordinate position, final Token token)
    {
-    if ((token != 'X') && (token != 'O'))
+    if ((token.charValue() != 'X') && (token.charValue() != 'O'))
      {
       throw new IllegalStateException("Token must be X or O!");
      }
@@ -128,6 +131,7 @@ public final class Board
       final int row = position.getRow() - 1;
       final int column = position.getColumn() - 1;
       this.board[row][column] = token;
+      this.history.makeEntry(position, token);
       return true;
      }
     return false;
@@ -142,9 +146,9 @@ public final class Board
   public boolean detectWin()
    {
     // Horizontal 3 rows
-    for (final char[] row : this.board)
+    for (final Token[] row : this.board)
      {
-      if ((row[0] != ' ') && (row[0] == row[1]) && (row [0] == row [2]))
+      if ((Token.of(' ').equals(row[0])) && (row[0] == row[1]) && (row [0] == row [2]))
        {
         return true;
        }
@@ -152,35 +156,21 @@ public final class Board
     // Vertical 3 columns
     for (int col = 0; col < 3; ++col)
      {
-      if ((this.board[0][col] != ' ') && (this.board[0][col] == this.board[1][col]) && (this.board[0][col] == this.board[2][col]))
+      if ((Token.of(' ').equals(this.board[0][col])) && (this.board[0][col] == this.board[1][col]) && (this.board[0][col] == this.board[2][col]))
        {
         return true;
        }
      }
     // Diagonal 2 diagonal
-    if ((this.board[0][0] != ' ') && (this.board[0][0] == this.board[1][1]) && (this.board[0][0] == this.board[2][2]))
+    if ((Token.of(' ').equals(this.board[0][0])) && (this.board[0][0] == this.board[1][1]) && (this.board[0][0] == this.board[2][2]))
      {
       return true;
      }
-    if ((this.board[0][2] != ' ') && (this.board[0][2] == this.board[1][1]) && (this.board[0][2] == this.board[2][0]))
+    if ((Token.of(' ').equals(this.board[0][2])) && (this.board[0][2] == this.board[1][1]) && (this.board[0][2] == this.board[2][0]))
      {
       return true;
      }
     return false;
-   }
-
-
-  /**
-   * Field chance to create 3 in a row.
-   *
-   * @param position Field position
-   * @return Chance (0-4)
-   */
-  public static int fieldChance(final Coordinate position)
-   {
-    final int row = position.getRow() - 1;
-    final int column = position.getColumn() - 1;
-    return FIELD_CHANCE[row][column];
    }
 
 
@@ -191,14 +181,14 @@ public final class Board
    * @param row Row
    * @return chance: 0-2
    */
-  private int rowColumnChance(final char token, final int row, final int column)
+  private int rowColumnChance(final Token token, final int row, final int column)
    {
-    final char fieldToken = this.board[row][column];
-    if (fieldToken == ' ')
+    final Token fieldToken = this.board[row][column];
+    if (Token.of(' ').equals(fieldToken))
      {
       return 1;
      }
-    else if (fieldToken == token)
+    else if (token.equals(fieldToken))
      {
        return 2;
      }
@@ -214,7 +204,7 @@ public final class Board
    * @param column Column
    * @return Chance
    */
-  private int horizontalChance(final char token, final int row, final int column)
+  private int horizontalChance(final Token token, final int row, final int column)
    {
     // Horizontal row     column 1-3
     final int column0 = rowColumnChance(token, row, 0);
@@ -237,7 +227,7 @@ public final class Board
    * @param column Column
    * @return Chance
    */
-  private int verticalChance(final char token, final int row, final int column)
+  private int verticalChance(final Token token, final int row, final int column)
    {
     // Vertical   column  row=1-3
     final int row0 = rowColumnChance(token, 0, column);
@@ -260,7 +250,7 @@ public final class Board
    * @param column Column
    * @return Chance
    */
-  private int diagonalTopLeftToBottomRight(final char token, final int row, final int column)
+  private final int diagonalTopLeftToBottomRight(final Token token, final int row, final int column)
    {
     if (((row == 1) && (column == 1)) || ((row == 0) &&  (column == 0)) || ((row == 2) && (column == 2)))
      {
@@ -285,7 +275,7 @@ public final class Board
    * @param column Column
    * @return Chance
    */
-  private int diagonalTopRightToBottomLeft(final char token, final int row, final int column)
+  private int diagonalTopRightToBottomLeft(final Token token, final int row, final int column)
    {
     if (((row == 1) && (column == 1)) || ((row == 0) && (column == 2)) || ((row == 2) && (column == 0)))
      {
@@ -309,7 +299,7 @@ public final class Board
    * @param token Token X, O
    * @return Chance 0-4
    */
-  public int fieldChanceFor3(final Coordinate position, final char token)
+  public int fieldChanceFor3(final Coordinate position, final Token token)
    {
     if (!isPositionEmpty(position))
      {
@@ -323,26 +313,6 @@ public final class Board
     chance += diagonalTopLeftToBottomRight(token, row, column);
     chance += diagonalTopRightToBottomLeft(token, row, column);
     return chance;
-   }
-
-
-  /**
-   * Get opposite token.
-   *
-   * @param token Token X, O, ' '
-   * @return Opposite token X, O, ' '
-   */
-  public char getOppositeToken(final char token)
-   {
-    switch (token)
-     {
-      case 'X':
-        return 'O';
-      case 'O':
-        return 'X';
-      default:
-        return ' ';
-     }
    }
 
 
@@ -412,13 +382,13 @@ public final class Board
     builder.append("  1 2 3\n"); // TODO Iterator CoordinteSystem columns
     builder.append("-------\n");
     int rowNr = 1;
-    for (final char[] row : this.board)
+    for (final Token[] row : this.board)
      {
       builder.append((rowNr == 1) ? 'A' : (rowNr == 2 ? 'B' : 'C')); // TODO Iterator CoordinteSystem rows
       builder.append('|');
-      for (final char column : row)
+      for (final Token column : row)
        {
-        builder.append(column).append('|');
+        builder.append(column.charValue()).append('|');
        }
       builder.append("\n-------\n");
       ++rowNr;

@@ -27,7 +27,7 @@ public class PlayerAI implements IPlayer
   /**
    * Token.
    */
-  private final char token;
+  private final Token token;
 
 
   /**
@@ -36,15 +36,15 @@ public class PlayerAI implements IPlayer
    * @param name Player name
    * @param token Token X/O
    */
-  public PlayerAI(final String name, final char token)
+  public PlayerAI(final String name, final Token token)
    {
     super();
     Objects.requireNonNull(name, "name"); //$NON-NLS-1$
     // Max length
     // Regexp
-    if ((token != 'X') && (token != 'O'))
+    if ((token.charValue() != 'X') && (token.charValue() != 'O'))
      {
-      throw new IllegalArgumentException("Tokn must be X or O");
+      throw new IllegalArgumentException("Token must be X or O");
      }
     this.name = name;
     this.token = token;
@@ -99,7 +99,7 @@ public class PlayerAI implements IPlayer
    * @param token Players token
    * @return Max entry
    */
-  private Entry<Coordinate, Integer> getPositionWithHighestChance(final Board board, final char token)
+  private Entry<Coordinate, Integer> getPositionWithHighestChance(final Board board, final Token token)
    {
     final Map<Coordinate, Integer> chances = new HashMap<>();
     for (char row = 'A'; row <= 'C'; ++row)
@@ -127,6 +127,29 @@ public class PlayerAI implements IPlayer
 
 
   /**
+   * Get first free entry.
+   *
+   * @param board Board
+   * @return Coordinate or null if no free position is available
+   */
+  private Coordinate getFirstFreePosition(final Board board)
+   {
+    for (char row = 'A'; row <= 'C'; ++row)
+     {
+      for (int column = 1; column <= 3; ++column)
+       {
+        final Coordinate position = new Coordinate(row, column);
+        if (board.isPositionEmpty(position))
+         {
+          return position;
+         }
+       }
+     }
+    return null;
+   }
+
+
+  /**
    * Make a  move.
    *
    * @param board Board to make the move on
@@ -134,13 +157,17 @@ public class PlayerAI implements IPlayer
   @Override
   public void makeMove(final Board board)
    {
-    final char oppositeToken = board.getOppositeToken(this.token);
+    final Token oppositeToken = this.token.getOppositeToken();
     Entry<Coordinate, Integer> maxEntry = getPositionWithHighestChance(board, oppositeToken);
     Coordinate position = makeMaxEntryCoordinate(maxEntry);
     if (maxEntry.getValue().intValue() < 1)
      {
       maxEntry = getPositionWithHighestChance(board, this.token);
       position = makeMaxEntryCoordinate(maxEntry);
+      if (maxEntry.getValue().intValue() < 1)
+       {
+        position = getFirstFreePosition(board);
+       }
      }
     final boolean result = board.setField(position, this.token);
     // Assume always ok
