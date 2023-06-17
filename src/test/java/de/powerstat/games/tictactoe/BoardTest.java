@@ -17,6 +17,15 @@ import org.junit.jupiter.api.Test;
 public class BoardTest
  {
   /**
+   * Default constructor.
+   */
+  public BoardTest()
+   {
+    super();
+   }
+
+
+  /**
    * Test constructor.
    */
   @Test
