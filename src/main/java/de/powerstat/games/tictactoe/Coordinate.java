@@ -29,7 +29,10 @@ public final class Coordinate
 
 
   /**
-   * Default constructor.
+   * Constructor.
+   *
+   * @param row Row nr.
+   * @param column Column nr.
    */
   public Coordinate(final char row, final int column)
    {

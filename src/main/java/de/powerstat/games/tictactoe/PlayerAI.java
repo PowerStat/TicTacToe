@@ -54,7 +54,7 @@ public class PlayerAI implements IPlayer
   /**
    * Make max entry coordinate from chance board.
    *
-   * @param chanceBoard Chance board
+   * @param maxEntry Maximum entry
    * @return Coordinate
    */
   private Coordinate makeMaxEntryCoordinate(final Entry<Coordinate, Integer> maxEntry)

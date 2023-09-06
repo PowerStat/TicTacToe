@@ -16,6 +16,9 @@ import java.util.Set;
  */
 public class History implements IHistory
  {
+  /**
+   * History map.
+   */
   Map<Integer, NTuple3<LocalDateTime, Coordinate, Token>> history = new HashMap<>();
 
 

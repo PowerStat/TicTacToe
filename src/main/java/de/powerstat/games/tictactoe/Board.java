@@ -179,6 +179,7 @@ public final class Board
    *
    * @param token Token
    * @param row Row
+   * @param column Column
    * @return chance: 0-2
    */
   private int rowColumnChance(final Token token, final int row, final int column)
