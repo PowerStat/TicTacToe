@@ -17,6 +17,12 @@ import org.junit.jupiter.api.Test;
 public class BoardTest
  {
   /**
+   * Comma text.
+   */
+  private static final String COMMA = ", ";
+
+
+  /**
    * Default constructor.
    */
   public BoardTest()
@@ -73,13 +79,13 @@ public class BoardTest
         buffer.append(result);
         if (column != 3)
          {
-          buffer.append(", ");
+          buffer.append(COMMA);
          }
        }
       buffer.append(']');
       if (row != 'C')
        {
-        buffer.append(", ");
+        buffer.append(COMMA);
        }
      }
     buffer.append(']');

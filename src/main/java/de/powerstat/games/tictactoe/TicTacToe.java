@@ -1,4 +1,4 @@
-/**
+/*
  * Copyright (C) 2023 Dipl.-Inform. Kai Hofmann. All rights reserved!
  */
 package de.powerstat.games.tictactoe;
@@ -13,8 +13,28 @@ import java.util.Random;
  * TODO Replay
  * TODO Hexagonal Architecture
  */
-public class TicTacToe
+public final class TicTacToe
  {
+  /**
+   * Make your move text.
+   */
+  private static final String MAKE_YOUR_MOVE = "Make your move: ";
+
+  /**
+   * Wins text.
+   */
+  private static final String WINS = " wins!";
+
+
+  /**
+   * Private default constructor.
+   */
+  private TicTacToe()
+   {
+    super();
+   }
+
+
   /**
    * Main.
    *
@@ -57,22 +77,22 @@ public class TicTacToe
     for (int round = 1; round <= 5; ++round)
      {
       System.out.println(board.toString());
-      System.out.println("Make your move: " + player1.getName());
+      System.out.println(MAKE_YOUR_MOVE + player1.getName());
       player1.makeMove(board);
       if (board.detectWin())
        {
-        System.out.println(player1.getName() + " wins!");
+        System.out.println(player1.getName() + WINS);
         System.out.println(board.toString());
         return;
        }
       System.out.println(board.toString());
       if (round < 5)
        {
-        System.out.println("Make your move: " + player2.getName());
+        System.out.println(MAKE_YOUR_MOVE + player2.getName());
         player2.makeMove(board);
         if (board.detectWin())
          {
-          System.out.println(player2.getName() + " wins!");
+          System.out.println(player2.getName() + WINS);
           System.out.println(board.toString());
           return;
          }

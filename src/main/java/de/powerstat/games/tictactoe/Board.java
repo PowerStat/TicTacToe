@@ -1,4 +1,4 @@
-/**
+/*
  * Copyright (C) 2023 Dipl.-Inform. Kai Hofmann. All rights reserved!
  */
 package de.powerstat.games.tictactoe;
@@ -50,7 +50,7 @@ public final class Board
    {
     for (final Token[] row : this.board)
      {
-      for (Token column : row)
+      for (Token column : row) // TODO Column not writable
        {
         column = Token.of(' ');
        }
@@ -148,7 +148,7 @@ public final class Board
     // Horizontal 3 rows
     for (final Token[] row : this.board)
      {
-      if ((Token.of(' ').equals(row[0])) && (row[0] == row[1]) && (row [0] == row [2]))
+      if ((Token.of(' ').equals(row[0])) && (row[0] == row[1]) && (row[0] == row[2]))
        {
         return true;
        }
@@ -251,9 +251,9 @@ public final class Board
    * @param column Column
    * @return Chance
    */
-  private final int diagonalTopLeftToBottomRight(final Token token, final int row, final int column)
+  private int diagonalTopLeftToBottomRight(final Token token, final int row, final int column)
    {
-    if (((row == 1) && (column == 1)) || ((row == 0) &&  (column == 0)) || ((row == 2) && (column == 2)))
+    if (((row == 1) && (column == 1)) || ((row == 0) && (column == 0)) || ((row == 2) && (column == 2)))
      {
       final int topLeft = rowColumnChance(token, 0, 0);
       final int middle = rowColumnChance(token, 1, 1);
@@ -294,7 +294,7 @@ public final class Board
 
 
   /**
-   * Field chance for 3 of given token for empty field
+   * Field chance for 3 of given token for empty field.
    *
    * @param position Board position
    * @param token Token X, O

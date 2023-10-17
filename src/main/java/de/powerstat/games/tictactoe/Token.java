@@ -1,4 +1,4 @@
-/**
+/*
  * Copyright (C) 2023 Dipl.-Inform. Kai Hofmann. All rights reserved!
  */
 package de.powerstat.games.tictactoe;
@@ -10,7 +10,7 @@ import java.util.Objects;
 /**
  * Players token.
  */
-public class Token implements Comparable<Token>
+public final class Token implements Comparable<Token>
  {
   /**
    * Token.

@@ -1,4 +1,4 @@
-/**
+/*
  * Copyright (C) 2023 Dipl.-Inform. Kai Hofmann. All rights reserved!
  */
 package de.powerstat.games.tictactoe;
@@ -19,7 +19,7 @@ public class History implements IHistory
   /**
    * History map.
    */
-  Map<Integer, NTuple3<LocalDateTime, Coordinate, Token>> history = new HashMap<>();
+  private final Map<Integer, NTuple3<LocalDateTime, Coordinate, Token>> history = new HashMap<>();
 
 
   /**

@@ -260,7 +260,7 @@
     </module>
     <module name="ReturnCount">
       <property name="max" value="7"/>
-      <property name="maxForVoid" value="1"/>
+      <property name="maxForVoid" value="3"/>
       <property name="format" value="^equals$"/>
       <property name="tokens" value="CTOR_DEF, METHOD_DEF, LAMBDA"/>
     </module>

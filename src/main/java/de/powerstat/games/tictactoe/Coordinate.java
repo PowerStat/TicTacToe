@@ -1,4 +1,4 @@
-/**
+/*
  * Copyright (C) 2023 Dipl.-Inform. Kai Hofmann. All rights reserved!
  */
 package de.powerstat.games.tictactoe;
@@ -20,12 +20,12 @@ public final class Coordinate
   /**
    * Row 1-3 = A-C.
    */
-  int row;
+  private final int row;
 
   /**
    * Column 1-3.
    */
-  int column;
+  private final int column;
 
 
   /**

@@ -1,4 +1,4 @@
-/**
+/*
  * Copyright (C) 2023 Dipl.-Inform. Kai Hofmann. All rights reserved!
  */
 package de.powerstat.games.tictactoe;
@@ -169,7 +169,7 @@ public class PlayerAI implements IPlayer
         position = getFirstFreePosition(board);
        }
      }
-    final boolean result = board.setField(position, this.token);
+    /* final boolean result = */ board.setField(position, this.token);
     // Assume always ok
    }
 
