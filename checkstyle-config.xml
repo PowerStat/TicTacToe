@@ -570,7 +570,7 @@
     </module>
     -->
     <module name="UncommentedMain">
-      <property name="excludedClasses" value="^$"/>
+      <property name="excludedClasses" value="^TicTacToe$"/>
     </module>
     <module name="UpperEll">
       <property name="severity" value="warning"/>

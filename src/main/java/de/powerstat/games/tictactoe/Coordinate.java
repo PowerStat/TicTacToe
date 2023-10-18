@@ -15,7 +15,7 @@ import java.util.Objects;
  * TODO size, width/height
  * TODO Factory
  */
-public final class Coordinate
+public final class Coordinate implements Comparable<Coordinate>
  {
   /**
    * Row 1-3 = A-C.
@@ -121,9 +121,29 @@ public final class Coordinate
   @Override
   public String toString()
    {
-    final StringBuilder builder = new StringBuilder();
+    final var builder = new StringBuilder();
     builder.append("Coordinate[row=").append(this.row).append(", column=").append(this.column).append(']'); //$NON-NLS-1$
     return builder.toString();
+   }
+
+
+  /**
+   * Compare with another object.
+   *
+   * @param obj Object to compare with
+   * @return 0: equal; 1: greater; -1: smaller
+   * @see java.lang.Comparable#compareTo(java.lang.Object)
+   */
+  @Override
+  public int compareTo(final Coordinate obj)
+   {
+    Objects.requireNonNull(obj, "obj"); //$NON-NLS-1$
+    int result = Integer.compare(this.row, obj.row);
+    if (result == 0)
+     {
+      result = Integer.compare(this.column, obj.column);
+     }
+    return result;
    }
 
  }

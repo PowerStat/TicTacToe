@@ -12,12 +12,12 @@ import org.junit.jupiter.api.Test;
 /**
  * NTuple 3 tests.
  */
-public class NTuple3Test
+final class NTuple3Test
  {
   /**
    * Default constructor.
    */
-  public NTuple3Test()
+  /* default */ NTuple3Test()
    {
     super();
    }
@@ -27,7 +27,7 @@ public class NTuple3Test
    * Constructor test.
    */
   @Test
-  public void of1()
+  /* default */ void testOf1()
    {
     final LocalDateTime now = LocalDateTime.now();
     final Coordinate position = new Coordinate('A', 1);

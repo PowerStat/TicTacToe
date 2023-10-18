@@ -15,6 +15,7 @@ import java.util.Objects;
  * TODO Constructor with width * height
  * TODO Factory
  */
+@SuppressWarnings("PMD.AvoidFieldNameMatchingTypeName")
 public final class Board
  {
   /**
@@ -64,9 +65,10 @@ public final class Board
    * @param src Source array.
    * @return Cloned array
    */
+  @SuppressWarnings("PMD.UseVarargs")
   private static Token[][] cloneArray(final Token[][] src)
    {
-    final Token[][] target = new Token[src.length][src[0].length];
+    final var target = new Token[src.length][src[0].length];
     for (int i = 0; i < src.length; ++i)
      {
       System.arraycopy(src[i], 0, target[i], 0, src[i].length);
@@ -113,14 +115,14 @@ public final class Board
 
 
   /**
-   * Set field with token.
+   * Place token on field.
    *
    * @param position Position ob board
    * @param token Token (X,O)
    * @return Successfully set
    * @throws IllegalStateException when the token is not X or O.
    */
-  public boolean setField(final Coordinate position, final Token token)
+  public boolean placeOnField(final Coordinate position, final Token token)
    {
     if ((token.charValue() != 'X') && (token.charValue() != 'O'))
      {
@@ -148,7 +150,7 @@ public final class Board
     // Horizontal 3 rows
     for (final Token[] row : this.board)
      {
-      if ((Token.of(' ').equals(row[0])) && (row[0] == row[1]) && (row[0] == row[2]))
+      if ((Token.of(' ').equals(row[0])) && (row[0].equals(row[1])) && (row[0].equals(row[2])))
        {
         return true;
        }
@@ -156,17 +158,13 @@ public final class Board
     // Vertical 3 columns
     for (int col = 0; col < 3; ++col)
      {
-      if ((Token.of(' ').equals(this.board[0][col])) && (this.board[0][col] == this.board[1][col]) && (this.board[0][col] == this.board[2][col]))
+      if ((Token.of(' ').equals(this.board[0][col])) && (this.board[0][col].equals(this.board[1][col])) && (this.board[0][col].equals(this.board[2][col])))
        {
         return true;
        }
      }
     // Diagonal 2 diagonal
-    if ((Token.of(' ').equals(this.board[0][0])) && (this.board[0][0] == this.board[1][1]) && (this.board[0][0] == this.board[2][2]))
-     {
-      return true;
-     }
-    if ((Token.of(' ').equals(this.board[0][2])) && (this.board[0][2] == this.board[1][1]) && (this.board[0][2] == this.board[2][0]))
+    if (((Token.of(' ').equals(this.board[0][0])) && (this.board[0][0].equals(this.board[1][1])) && (this.board[0][0].equals(this.board[2][2]))) || ((Token.of(' ').equals(this.board[0][2])) && (this.board[0][2].equals(this.board[1][1])) && (this.board[0][2].equals(this.board[2][0]))))
      {
       return true;
      }
@@ -184,14 +182,14 @@ public final class Board
    */
   private int rowColumnChance(final Token token, final int row, final int column)
    {
-    final Token fieldToken = this.board[row][column];
+    final var fieldToken = this.board[row][column];
     if (Token.of(' ').equals(fieldToken))
      {
       return 1;
      }
     else if (token.equals(fieldToken))
      {
-       return 2;
+      return 2;
      }
     return 0;
    }
@@ -202,10 +200,9 @@ public final class Board
    *
    * @param token Token
    * @param row Row
-   * @param column Column
    * @return Chance
    */
-  private int horizontalChance(final Token token, final int row, final int column)
+  private int horizontalChance(final Token token, final int row)
    {
     // Horizontal row     column 1-3
     final int column0 = rowColumnChance(token, row, 0);
@@ -224,11 +221,10 @@ public final class Board
    * Get vertical chance.
    *
    * @param token Token
-   * @param row Row
    * @param column Column
    * @return Chance
    */
-  private int verticalChance(final Token token, final int row, final int column)
+  private int verticalChance(final Token token, final int column)
    {
     // Vertical   column  row=1-3
     final int row0 = rowColumnChance(token, 0, column);
@@ -309,8 +305,8 @@ public final class Board
     int chance = 0;
     final int row = position.getRow() - 1;
     final int column = position.getColumn() - 1;
-    chance += horizontalChance(token, row, column);
-    chance += verticalChance(token, row, column);
+    chance += horizontalChance(token, row);
+    chance += verticalChance(token, column);
     chance += diagonalTopLeftToBottomRight(token, row, column);
     chance += diagonalTopRightToBottomLeft(token, row, column);
     return chance;
@@ -378,7 +374,7 @@ public final class Board
   public String toString()
    {
     // return Arrays.deepToString(this.board);
-    final StringBuilder builder = new StringBuilder();
+    final var builder = new StringBuilder(42);
     builder.append("Board[\n");
     builder.append("  1 2 3\n"); // TODO Iterator CoordinteSystem columns
     builder.append("-------\n");

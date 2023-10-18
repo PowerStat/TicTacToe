@@ -14,7 +14,7 @@ import org.junit.jupiter.api.Test;
 /**
  * Test Board.
  */
-public class BoardTest
+final class BoardTest
  {
   /**
    * Comma text.
@@ -25,7 +25,7 @@ public class BoardTest
   /**
    * Default constructor.
    */
-  public BoardTest()
+  /* default */ BoardTest()
    {
     super();
    }
@@ -35,7 +35,7 @@ public class BoardTest
    * Test constructor.
    */
   @Test
-  public void constructor()
+  /* default */ void testConstructor()
    {
     final IHistory history = new History();
     final Board board = new Board(history);
@@ -47,8 +47,8 @@ public class BoardTest
    * Test toString.
    */
   @Test
-  @Disabled
-  public void testToString()
+  @Disabled("TODO")
+  /* default */ void testToString()
    {
     final IHistory history = new History();
     final Board board = new Board(history);
@@ -61,12 +61,12 @@ public class BoardTest
    * Test field chance for 3.
    */
   @Test
-  @Disabled
-  public void testFieldChanceFor3()
+  @Disabled("TODO")
+  /* default */ void testFieldChanceFor3()
    {
     final IHistory history = new History();
     final Board board = new Board(history);
-    board.setField(new Coordinate('B', 2), Token.of('O'));
+    board.placeOnField(new Coordinate('B', 2), Token.of('O'));
     final StringBuilder buffer = new StringBuilder();
     buffer.append('[');
     for (char row = 'A'; row <= 'C'; ++row)
@@ -90,6 +90,7 @@ public class BoardTest
      }
     buffer.append(']');
     System.out.println(buffer);
+    // TODO assert
    }
 
  }

@@ -10,12 +10,12 @@ import org.junit.jupiter.api.Test;
 /**
  * Token tests.
  */
-public class TokenTest
+final class TokenTest
  {
   /**
    * Default constructor.
    */
-  public TokenTest()
+  /* default */ TokenTest()
    {
     super();
    }
@@ -25,7 +25,7 @@ public class TokenTest
    * Constructor test.
    */
   @Test
-  public void constructor1()
+  /* default */ void testConstructor1()
    {
     final Token token = Token.of('X');
     assertNotNull(token, "Factory failed!");

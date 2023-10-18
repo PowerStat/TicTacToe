@@ -4,6 +4,7 @@
 package de.powerstat.games.tictactoe;
 
 
+import java.nio.charset.StandardCharsets;
 import java.util.Objects;
 import java.util.Scanner;
 
@@ -55,22 +56,24 @@ public class PlayerHuman implements IPlayer
    * @param board Board to make the move on
    */
   @Override
+  @SuppressWarnings("java:S106")
   public void makeMove(final Board board)
    {
     boolean result = false;
-    do
+    try (var scan = new Scanner(System.in, StandardCharsets.US_ASCII))
      {
-      System.out.print("Coordinate: ");
-      final Scanner scan = new Scanner(System.in);
-      final String coordStr = scan.nextLine();
-      // scan.close();
-      if ((coordStr.length() != 2) || (coordStr.charAt(0) < 'A') || (coordStr.charAt(0) > 'C') || (coordStr.charAt(1) < '1') || (coordStr.charAt(1) > '3'))
+      do
        {
-        continue;
+        System.out.print("Coordinate: ");
+        final String coordStr = scan.nextLine();
+        if ((coordStr.length() != 2) || (coordStr.charAt(0) < 'A') || (coordStr.charAt(0) > 'C') || (coordStr.charAt(1) < '1') || (coordStr.charAt(1) > '3'))
+         {
+          continue;
+         }
+        result = board.placeOnField(new Coordinate(coordStr.charAt(0), Character.getNumericValue(coordStr.charAt(1))), this.token);
        }
-      result = board.setField(new Coordinate(coordStr.charAt(0), Character.getNumericValue(coordStr.charAt(1))), this.token);
+      while (!result);
      }
-    while (!result);
    }
 
 

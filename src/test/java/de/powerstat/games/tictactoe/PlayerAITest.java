@@ -10,12 +10,12 @@ import org.junit.jupiter.api.Test;
 /**
  * Player AI tests.
  */
-public class PlayerAITest
+final class PlayerAITest
  {
   /**
    * Default constructor.
    */
-  public PlayerAITest()
+  /* default */ PlayerAITest()
    {
     super();
    }
@@ -25,7 +25,7 @@ public class PlayerAITest
    * Constructor test.
    */
   @Test
-  public void constructor1()
+  /* default */ void testConstructor1()
    {
     final Token token = Token.of('X');
     final PlayerAI player = new PlayerAI("Test", token);

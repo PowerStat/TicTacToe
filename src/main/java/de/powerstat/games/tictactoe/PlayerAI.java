@@ -4,10 +4,10 @@
 package de.powerstat.games.tictactoe;
 
 
-import java.util.HashMap;
 import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Objects;
+import java.util.concurrent.ConcurrentHashMap;
 
 
 /**
@@ -57,7 +57,7 @@ public class PlayerAI implements IPlayer
    * @param maxEntry Maximum entry
    * @return Coordinate
    */
-  private Coordinate makeMaxEntryCoordinate(final Entry<Coordinate, Integer> maxEntry)
+  private static Coordinate makeMaxEntryCoordinate(final Entry<Coordinate, Integer> maxEntry)
    {
     final char[] arr = {'A', 'B', 'C'};
     final char row = arr[maxEntry.getKey().getRow() - 1];
@@ -71,12 +71,11 @@ public class PlayerAI implements IPlayer
    *
    * @param chances Chances on board
    */
-  private void showChances(final Map<Coordinate, Integer> chances)
+  @SuppressWarnings("java:S106")
+  private static void showChances(final Map<Coordinate, Integer> chances)
    {
-    final StringBuilder builder = new StringBuilder();
-    builder.append("Board[\n");
-    builder.append("  1 2 3\n");
-    builder.append("-------\n");
+    final var builder = new StringBuilder(42);
+    builder.append("Board[\n  1 2 3\n-------\n");
     for (char row = 'A'; row <= 'C'; ++row)
      {
       builder.append(row).append('|');
@@ -99,14 +98,14 @@ public class PlayerAI implements IPlayer
    * @param token Players token
    * @return Max entry
    */
-  private Entry<Coordinate, Integer> getPositionWithHighestChance(final Board board, final Token token)
+  private static Entry<Coordinate, Integer> getPositionWithHighestChance(final Board board, final Token token)
    {
-    final Map<Coordinate, Integer> chances = new HashMap<>();
+    final Map<Coordinate, Integer> chances = new ConcurrentHashMap<>();
     for (char row = 'A'; row <= 'C'; ++row)
      {
       for (int column = 1; column <= 3; ++column)
        {
-        final Coordinate position = new Coordinate(row, column);
+        final var position = new Coordinate(row, column);
         final int chance = board.fieldChanceFor3(position, token);
         chances.put(position, chance);
        }
@@ -132,13 +131,13 @@ public class PlayerAI implements IPlayer
    * @param board Board
    * @return Coordinate or null if no free position is available
    */
-  private Coordinate getFirstFreePosition(final Board board)
+  private static Coordinate getFirstFreePosition(final Board board)
    {
     for (char row = 'A'; row <= 'C'; ++row)
      {
       for (int column = 1; column <= 3; ++column)
        {
-        final Coordinate position = new Coordinate(row, column);
+        final var position = new Coordinate(row, column);
         if (board.isPositionEmpty(position))
          {
           return position;
@@ -159,18 +158,28 @@ public class PlayerAI implements IPlayer
    {
     final Token oppositeToken = this.token.getOppositeToken();
     Entry<Coordinate, Integer> maxEntry = getPositionWithHighestChance(board, oppositeToken);
-    Coordinate position = makeMaxEntryCoordinate(maxEntry);
-    if (maxEntry.getValue().intValue() < 1)
+    Coordinate position = null;
+    if (maxEntry != null)
+     {
+      position = makeMaxEntryCoordinate(maxEntry);
+     }
+    if ((maxEntry == null) || (maxEntry.getValue().intValue() < 1))
      {
       maxEntry = getPositionWithHighestChance(board, this.token);
-      position = makeMaxEntryCoordinate(maxEntry);
-      if (maxEntry.getValue().intValue() < 1)
+      if (maxEntry != null)
+       {
+        position = makeMaxEntryCoordinate(maxEntry);
+       }
+      if ((maxEntry == null) || (maxEntry.getValue().intValue() < 1))
        {
         position = getFirstFreePosition(board);
        }
      }
-    /* final boolean result = */ board.setField(position, this.token);
-    // Assume always ok
+    if (position != null)
+     {
+      /* final boolean result = */ board.placeOnField(position, this.token);
+      // Assume always ok
+     }
    }
 
 

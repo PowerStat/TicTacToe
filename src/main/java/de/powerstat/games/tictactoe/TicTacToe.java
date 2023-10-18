@@ -4,6 +4,7 @@
 package de.powerstat.games.tictactoe;
 
 
+import java.security.SecureRandom;
 import java.util.Random;
 
 
@@ -13,6 +14,7 @@ import java.util.Random;
  * TODO Replay
  * TODO Hexagonal Architecture
  */
+@SuppressWarnings("java:S106")
 public final class TicTacToe
  {
   /**
@@ -65,10 +67,10 @@ public final class TicTacToe
      }
 
     // Init board
-    final Board board = new Board(new History());
+    final var board = new Board(new History());
 
     // Random start player
-    final Random random = new Random();
+    final Random random = new SecureRandom();
     final int startingPlayer = random.nextInt(2 - 1) + 1;
     final IPlayer player1 = (startingPlayer == 1) ? playerA : playerB;
     final IPlayer player2 = (startingPlayer == 1) ? playerB : playerA;

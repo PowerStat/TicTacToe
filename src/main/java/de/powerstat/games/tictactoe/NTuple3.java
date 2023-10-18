@@ -166,7 +166,7 @@ public final class NTuple3<T1, T2, T3>
   @Override
   public String toString()
    {
-    final StringBuilder builder = new StringBuilder(37);
+    final var builder = new StringBuilder(37);
     builder.append("NTuple3[object1=").append(this.object1).append(", object2=").append(this.object2).append(", object3=").append(this.object3).append(']'); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
     return builder.toString();
    }

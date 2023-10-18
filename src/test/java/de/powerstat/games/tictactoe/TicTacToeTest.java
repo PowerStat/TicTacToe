@@ -8,12 +8,12 @@ import org.junit.jupiter.api.Test;
 /**
  * Tic tac toe tests.
  */
-public class TicTacToeTest
+final class TicTacToeTest
  {
   /**
    * Default constructor.
    */
-  public TicTacToeTest()
+  /* default */ TicTacToeTest()
    {
     super();
    }
@@ -23,10 +23,11 @@ public class TicTacToeTest
    * Constructor test.
    */
   @Test
-  public void main1()
+  /* default */ void testMain1()
    {
     final String[] arguments = {};
     TicTacToe.main(arguments);
+    // TODO assert
    }
 
  }

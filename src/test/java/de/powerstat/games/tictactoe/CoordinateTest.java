@@ -12,12 +12,12 @@ import org.junit.jupiter.api.Test;
 /**
  * Coordinate tests.
  */
-public class CoordinateTest
+final class CoordinateTest
  {
   /**
    * Default constructor.
    */
-  public CoordinateTest()
+  /* default */ CoordinateTest()
    {
     super();
    }
@@ -27,7 +27,7 @@ public class CoordinateTest
    * Constructor test.
    */
   @Test
-  public void constructor1()
+  /* default */ void testConstructor1()
    {
     final Coordinate position = new Coordinate('A', 1);
     assertNotNull(position, "Construtor failed!");

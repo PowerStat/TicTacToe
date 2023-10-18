@@ -10,12 +10,12 @@ import org.junit.jupiter.api.Test;
 /**
  * History tests.
  */
-public class HistoryTest
+final class HistoryTest
  {
   /**
    * Default constructor.
    */
-  public HistoryTest()
+  /* default */ HistoryTest()
    {
     super();
    }
@@ -25,7 +25,7 @@ public class HistoryTest
    * Constructor test.
    */
   @Test
-  public void constructor1()
+  /* default */ void testConstructor1()
    {
     final History history = new History();
     assertNotNull(history, "Construtor failed!");

@@ -10,6 +10,7 @@ import java.util.Objects;
 /**
  * Players token.
  */
+@SuppressWarnings("PMD.AvoidFieldNameMatchingTypeName")
 public final class Token implements Comparable<Token>
  {
   /**
@@ -155,7 +156,7 @@ public final class Token implements Comparable<Token>
   @Override
   public String toString()
    {
-    final StringBuilder builder = new StringBuilder();
+    final var builder = new StringBuilder();
     builder.append("Token[token=").append(this.token).append(']'); //$NON-NLS-1$
     return builder.toString();
    }
