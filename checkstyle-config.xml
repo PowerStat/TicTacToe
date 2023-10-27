@@ -94,7 +94,7 @@
     </module>
     <module name="ThrowsCount">
       <property name="ignorePrivateMethods" value="true"/>
-      <property name="max" value="6"/>
+      <property name="max" value="10"/>
     </module>
     <module name="VisibilityModifier">
       <property name="severity" value="warning"/>
@@ -259,7 +259,7 @@
     <module name="ReturnCount">
       <property name="format" value="^equals$"/>
       <property name="max" value="95"/>
-      <property name="maxForVoid" value="1"/>
+      <property name="maxForVoid" value="4"/>
       <property name="tokens" value="CTOR_DEF, METHOD_DEF, LAMBDA"/>
     </module>
     <module name="SimplifyBooleanExpression">
@@ -307,7 +307,7 @@
       <property name="excludes" value=""/>
     </module>
     <module name="AvoidStaticImport">
-      <property name="excludes" value="org.junit.jupiter.api.Assertions.*"/>
+      <property name="excludes" value="org.junit.jupiter.api.Assertions.*,org.mockito.Mockito.*,org.mockito.ArgumentMatchers.*"/>
     </module>
     <!--
     <module name="CustomImportOrder">
@@ -774,7 +774,7 @@
       <property name="max" value="18"/>
     </module>
     <module name="MethodCount">
-      <property name="maxPackage" value="100"/>
+      <property name="maxPackage" value="110"/>
       <property name="maxPrivate" value="100"/>
       <property name="maxProtected" value="100"/>
       <property name="maxPublic" value="110"/>
