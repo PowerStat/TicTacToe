@@ -286,7 +286,7 @@
   </rule>
   <rule ref="category/java/codestyle.xml/LongVariable">
     <properties>
-      <property name="minimum value="36" />
+      <property name="minimum" value="36" />
     </properties>
   </rule>
   <rule ref="category/java/codestyle.xml/MDBAndSessionBeanNamingConvention" />
