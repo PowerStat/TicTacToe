@@ -5,7 +5,7 @@
   <parent>
     <groupId>de.powerstat.toolbaseline</groupId>
     <artifactId>tbl-java-parent</artifactId>
-    <version>11.3.0</version>
+    <version>17.0.0-SNAPSHOT</version>
   </parent>
 
   <groupId>de.powerstat.games</groupId>
@@ -18,20 +18,23 @@
   <url>https://www.powerstat.de/</url>
 
   <properties>
-    <license.inceptionYear>2015</license.inceptionYear>
+    <license.inceptionYear>2023</license.inceptionYear>
+    <imageName>tictactoe</imageName>
+    <mainClass>de.powerstat.games.tictactoe.TicTacToe</mainClass>
 
   </properties>
 
   <repositories>
   </repositories>
 
+ 
   <build>
     <plugins>
 
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-jar-plugin</artifactId>
-        <version>3.3.0</version>
+        <version>3.4.2</version>
         <configuration>
           <archive>
             <manifestEntries>
@@ -41,7 +44,6 @@
             </manifestEntries>
             <addMavenDescriptor>false</addMavenDescriptor>
           </archive>
-          <finalName>${project.artifactId}</finalName>
         </configuration>
       </plugin>
        
@@ -69,13 +71,28 @@
       <plugin> <!-- Not working: https://issues.apache.org/jira/browse/MJDEPS-25 -->
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-jdeps-plugin</artifactId>
+        <version>3.1.2</version>
         <configuration>
           <module>de.powerstat.games.tictactoe</module>
-          <multiRelease>11</multiRelease>
+          <multiRelease>17</multiRelease>
         </configuration>
       </plugin>
 
       <!-- TODO pandoc -> epub, markdown, odt, ... -->
+
+      <plugin>
+        <groupId>org.codehaus.mojo</groupId>
+        <artifactId>exec-maven-plugin</artifactId>
+        <version>3.3.0</version>
+        <configuration>        
+          <mainClass>${mainClass}</mainClass>
+          <!--
+          <arguments>
+            <argument>YourName</argument>
+          </arguments>
+          -->
+        </configuration>
+      </plugin>
 
     </plugins>
   </build>
