@@ -60,6 +60,22 @@ If you use [infer][https://fbinfer.com/]:
 
     infer run -- mvn clean compile
 
+To create a spdx:
+
+    mvn spdx:createSPDX
+
+To create a cycloneDX:
+
+    mvn cyclonedx:makeBom
+    
+To upload bom to dependency-track:
+
+    mvn dependency-track:upload-bom
+    
+To look for dependency-track findings: 
+
+    mvn dependency-track:findings
+
 
 ## Usage
 
