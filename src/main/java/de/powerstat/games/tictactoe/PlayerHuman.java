@@ -16,7 +16,7 @@ import java.util.Scanner;
  * equals
  * toString
  */
-public class PlayerHuman implements IPlayer
+public final class PlayerHuman implements IPlayer
  {
   /**
    * Player name.
@@ -34,6 +34,7 @@ public class PlayerHuman implements IPlayer
    *
    * @param name Player name
    * @param token Token X/O
+   * @throws IllegalArgumentException when token is not X or O
    */
   public PlayerHuman(final String name, final Token token)
    {
@@ -43,7 +44,7 @@ public class PlayerHuman implements IPlayer
     // Regexp
     if ((token.charValue() != 'X') && (token.charValue() != 'O'))
      {
-      throw new IllegalArgumentException("Tokn must be X or O");
+      throw new IllegalArgumentException("Token must be X or O");
      }
     this.name = name;
     this.token = token;

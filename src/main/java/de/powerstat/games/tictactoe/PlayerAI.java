@@ -17,7 +17,7 @@ import java.util.concurrent.ConcurrentHashMap;
  * equals
  * toString
  */
-public class PlayerAI implements IPlayer
+public final class PlayerAI implements IPlayer
  {
   /**
    * Player name.
@@ -35,6 +35,7 @@ public class PlayerAI implements IPlayer
    *
    * @param name Player name
    * @param token Token X/O
+   * @throws IllegalArgumentException If token is not X or O
    */
   public PlayerAI(final String name, final Token token)
    {
