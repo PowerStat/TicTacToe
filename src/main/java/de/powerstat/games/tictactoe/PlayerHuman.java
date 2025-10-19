@@ -4,7 +4,6 @@
 package de.powerstat.games.tictactoe;
 
 
-import java.nio.charset.StandardCharsets;
 import java.util.Objects;
 import java.util.Scanner;
 
@@ -28,18 +27,25 @@ public final class PlayerHuman implements IPlayer
    */
   private final Token token;
 
+  /**
+   * Scanner.
+   */
+  private final Scanner scan;
+
 
   /**
    * Constructor.
    *
    * @param name Player name
    * @param token Token X/O
+   * @param scan Scanner
    * @throws IllegalArgumentException when token is not X or O
    */
-  public PlayerHuman(final String name, final Token token)
+  public PlayerHuman(final String name, final Token token, final Scanner scan)
    {
     super();
     Objects.requireNonNull(name, "name"); //$NON-NLS-1$
+    Objects.requireNonNull(scan, "scan"); //$NON-NLS-1$
     // Max length
     // Regexp
     if ((token.charValue() != 'X') && (token.charValue() != 'O'))
@@ -48,6 +54,7 @@ public final class PlayerHuman implements IPlayer
      }
     this.name = name;
     this.token = token;
+    this.scan = scan;
    }
 
 
@@ -61,20 +68,17 @@ public final class PlayerHuman implements IPlayer
   public void makeMove(final Board board)
    {
     boolean result = false;
-    try (var scan = new Scanner(System.in, StandardCharsets.US_ASCII))
+    do
      {
-      do
+      System.out.print("Coordinate: ");
+      final String coordStr = this.scan.nextLine();
+      if ((coordStr.length() != 2) || (coordStr.charAt(0) < 'A') || (coordStr.charAt(0) > 'C') || (coordStr.charAt(1) < '1') || (coordStr.charAt(1) > '3'))
        {
-        System.out.print("Coordinate: ");
-        final String coordStr = scan.nextLine();
-        if ((coordStr.length() != 2) || (coordStr.charAt(0) < 'A') || (coordStr.charAt(0) > 'C') || (coordStr.charAt(1) < '1') || (coordStr.charAt(1) > '3'))
-         {
-          continue;
-         }
-        result = board.placeOnField(new Coordinate(coordStr.charAt(0), Character.getNumericValue(coordStr.charAt(1))), this.token);
+        continue;
        }
-      while (!result);
+      result = board.placeOnField(new Coordinate(coordStr.charAt(0), Character.getNumericValue(coordStr.charAt(1))), this.token);
      }
+    while (!result);
    }
 
 

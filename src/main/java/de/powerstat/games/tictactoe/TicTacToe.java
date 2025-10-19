@@ -4,8 +4,10 @@
 package de.powerstat.games.tictactoe;
 
 
+import java.nio.charset.StandardCharsets;
 import java.security.SecureRandom;
 import java.util.Random;
+import java.util.Scanner;
 
 
 /**
@@ -47,6 +49,7 @@ public final class TicTacToe
     // Arguments
     IPlayer playerA;
     IPlayer playerB;
+    final var scan = new Scanner(System.in, StandardCharsets.US_ASCII);
     switch (args.length)
      {
       case 0: // AI vs AI
@@ -54,12 +57,12 @@ public final class TicTacToe
         playerB = new PlayerAI("AI2", Token.of('O'));
         break;
       case 1: // Human vs AI
-        playerA = new PlayerHuman(args[0], Token.of('X'));
+        playerA = new PlayerHuman(args[0], Token.of('X'), scan);
         playerB = new PlayerAI("AI", Token.of('O'));
         break;
       case 2: // Human vs Human
-        playerA = new PlayerHuman(args[0], Token.of('X'));
-        playerB = new PlayerHuman(args[1], Token.of('O'));
+        playerA = new PlayerHuman(args[0], Token.of('X'), scan);
+        playerB = new PlayerHuman(args[1], Token.of('O'), scan);
         break;
       default:
         System.out.println("TicTacToe [Name player 1 [Name player 2]]");

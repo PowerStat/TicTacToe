@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2023 Dipl.-Inform. Kai Hofmann. All rights reserved!
+ * Copyright (C) 2023-2025 Dipl.-Inform. Kai Hofmann. All rights reserved!
  */
 package de.powerstat.games.tictactoe;
 
@@ -150,7 +150,7 @@ public final class Board
     // Horizontal 3 rows
     for (final Token[] row : this.board)
      {
-      if ((Token.of(' ').equals(row[0])) && (row[0].equals(row[1])) && (row[0].equals(row[2])))
+      if ((!Token.of(' ').equals(row[0])) && (row[0].equals(row[1])) && (row[0].equals(row[2])))
        {
         return true;
        }
@@ -158,13 +158,13 @@ public final class Board
     // Vertical 3 columns
     for (int col = 0; col < 3; ++col)
      {
-      if ((Token.of(' ').equals(this.board[0][col])) && (this.board[0][col].equals(this.board[1][col])) && (this.board[0][col].equals(this.board[2][col])))
+      if ((!Token.of(' ').equals(this.board[0][col])) && (this.board[0][col].equals(this.board[1][col])) && (this.board[0][col].equals(this.board[2][col])))
        {
         return true;
        }
      }
-    // Diagonal 2 diagonal
-    if (((Token.of(' ').equals(this.board[0][0])) && (this.board[0][0].equals(this.board[1][1])) && (this.board[0][0].equals(this.board[2][2]))) || ((Token.of(' ').equals(this.board[0][2])) && (this.board[0][2].equals(this.board[1][1])) && (this.board[0][2].equals(this.board[2][0]))))
+    // Diagonal 3 diagonal
+    if (((!Token.of(' ').equals(this.board[0][0])) && (this.board[0][0].equals(this.board[1][1])) && (this.board[0][0].equals(this.board[2][2]))) || ((!Token.of(' ').equals(this.board[0][2])) && (this.board[0][2].equals(this.board[1][1])) && (this.board[0][2].equals(this.board[2][0]))))
      {
       return true;
      }
@@ -340,11 +340,10 @@ public final class Board
      {
       return true;
      }
-    if (!(obj instanceof Board))
+    if (!(obj instanceof final Board other))
      {
       return false;
      }
-    final Board other = (Board)obj;
     return Arrays.deepEquals(this.board, other.board);
    }
 
