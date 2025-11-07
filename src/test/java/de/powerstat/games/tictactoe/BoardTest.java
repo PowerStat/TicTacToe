@@ -13,6 +13,7 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import org.junit.jupiter.api.Test;
+import nl.jqno.equalsverifier.*;
 
 
 /**
@@ -420,55 +421,12 @@ final class BoardTest
 
 
   /**
-   * Test hash code.
+   * Equalsverifier.
    */
   @Test
-  /* default */ void testHashCode()
+  public void equalsContract()
    {
-    final IHistory history1 = new History();
-    final IHistory history2 = new History();
-    final IHistory history3 = new History();
-    final Board board1 = new Board(history1);
-    final Board board2 = new Board(history2);
-    final Board board3 = new Board(history3);
-    final Coordinate position = new Coordinate('A', 1);
-    final Token token = Token.of('X');
-    final boolean result = board3.placeOnField(position, token);
-    assertAll("testHashCode", //$NON-NLS-1$
-      () -> assertEquals(board1.hashCode(), board2.hashCode(), "hashCodes are not equal"), //$NON-NLS-1$
-      () -> assertNotEquals(board1.hashCode(), board3.hashCode(), "hashCodes are equal") //$NON-NLS-1$
-    );
-   }
-
-
-  /**
-   * Test equals.
-   */
-  @Test
-  @SuppressWarnings("java:S5785")
-  /* default */ void testEquals()
-   {
-    final IHistory history1 = new History();
-    final IHistory history2 = new History();
-    final IHistory history3 = new History();
-    final IHistory history4 = new History();
-    final Board board1 = new Board(history1);
-    final Board board2 = new Board(history2);
-    final Board board3 = new Board(history3);
-    final Board board4 = new Board(history4);
-    final Coordinate position = new Coordinate('A', 1);
-    final Token token = Token.of('X');
-    final boolean result = board3.placeOnField(position, token);
-    assertAll("testEquals", //$NON-NLS-1$
-      () -> assertTrue(board1.equals(board1), "board11 is not equal"), //$NON-NLS-1$
-      () -> assertTrue(board1.equals(board2), "board12 are not equal"), //$NON-NLS-1$
-      () -> assertTrue(board2.equals(board1), "board21 are not equal"), //$NON-NLS-1$
-      () -> assertTrue(board2.equals(board4), "board24 are not equal"), //$NON-NLS-1$
-      () -> assertTrue(board1.equals(board4), "board14 are not equal"), //$NON-NLS-1$
-      () -> assertFalse(board1.equals(board3), "board13 are equal"), //$NON-NLS-1$
-      () -> assertFalse(board3.equals(board1), "board31 are equal"), //$NON-NLS-1$
-      () -> assertFalse(board1.equals(null), "board10 is equal") //$NON-NLS-1$
-    );
+    EqualsVerifier.forClass(Board.class).withNonnullFields("history").withIgnoredFields("history").verify();
    }
 
 

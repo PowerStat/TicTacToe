@@ -13,6 +13,7 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import org.junit.jupiter.api.Test;
+import nl.jqno.equalsverifier.*;
 
 
 /**
@@ -69,42 +70,12 @@ final class CoordinateTest
 
 
   /**
-   * Test hash code.
+   * Equalsverifier.
    */
   @Test
-  /* default */ void testHashCode()
+  public void equalsContract()
    {
-    final Coordinate position1 = new Coordinate('A', 1);
-    final Coordinate position2 = new Coordinate('A', 1);
-    final Coordinate position3 = new Coordinate('B', 2);
-    assertAll("testHashCode", //$NON-NLS-1$
-      () -> assertEquals(position1.hashCode(), position2.hashCode(), "hashCodes are not equal"), //$NON-NLS-1$
-      () -> assertNotEquals(position1.hashCode(), position3.hashCode(), "hashCodes are equal") //$NON-NLS-1$
-    );
-   }
-
-
-  /**
-   * Test equals.
-   */
-  @Test
-  @SuppressWarnings("java:S5785")
-  /* default */ void testEquals()
-   {
-    final Coordinate position1 = new Coordinate('A', 1);
-    final Coordinate position2 = new Coordinate('A', 1);
-    final Coordinate position3 = new Coordinate('B', 2);
-    final Coordinate position4 = new Coordinate('A', 1);
-    assertAll("testEquals", //$NON-NLS-1$
-      () -> assertTrue(position1.equals(position1), "position11 is not equal"), //$NON-NLS-1$
-      () -> assertTrue(position1.equals(position2), "position12 are not equal"), //$NON-NLS-1$
-      () -> assertTrue(position2.equals(position1), "position21 are not equal"), //$NON-NLS-1$
-      () -> assertTrue(position2.equals(position4), "position24 are not equal"), //$NON-NLS-1$
-      () -> assertTrue(position1.equals(position4), "position14 are not equal"), //$NON-NLS-1$
-      () -> assertFalse(position1.equals(position3), "position13 are equal"), //$NON-NLS-1$
-      () -> assertFalse(position3.equals(position1), "position31 are equal"), //$NON-NLS-1$
-      () -> assertFalse(position1.equals(null), "position10 is equal") //$NON-NLS-1$
-    );
+    EqualsVerifier.forClass(Coordinate.class).verify();
    }
 
 

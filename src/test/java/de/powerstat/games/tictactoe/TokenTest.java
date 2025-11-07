@@ -13,6 +13,7 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import org.junit.jupiter.api.Test;
+import nl.jqno.equalsverifier.*;
 
 
 /**
@@ -116,42 +117,12 @@ final class TokenTest
 
 
   /**
-   * Test hash code.
+   * Equalsverifier.
    */
   @Test
-  /* default */ void testHashCode()
+  public void equalsContract()
    {
-    final Token token1 = Token.of('X');
-    final Token token2 = Token.of('X');
-    final Token token3 = Token.of('O');
-    assertAll("testHashCode", //$NON-NLS-1$
-      () -> assertEquals(token1.hashCode(), token2.hashCode(), "hashCodes are not equal"), //$NON-NLS-1$
-      () -> assertNotEquals(token1.hashCode(), token3.hashCode(), "hashCodes are equal") //$NON-NLS-1$
-    );
-   }
-
-
-  /**
-   * Test equals.
-   */
-  @Test
-  @SuppressWarnings("java:S5785")
-  /* default */ void testEquals()
-   {
-    final Token token1 = Token.of('X');
-    final Token token2 = Token.of('X');
-    final Token token3 = Token.of('O');
-    final Token token4 = Token.of('X');
-    assertAll("testEquals", //$NON-NLS-1$
-      () -> assertTrue(token1.equals(token1), "token11 is not equal"), //$NON-NLS-1$
-      () -> assertTrue(token1.equals(token2), "token12 are not equal"), //$NON-NLS-1$
-      () -> assertTrue(token2.equals(token1), "token21 are not equal"), //$NON-NLS-1$
-      () -> assertTrue(token2.equals(token4), "token24 are not equal"), //$NON-NLS-1$
-      () -> assertTrue(token1.equals(token4), "token14 are not equal"), //$NON-NLS-1$
-      () -> assertFalse(token1.equals(token3), "token13 are equal"), //$NON-NLS-1$
-      () -> assertFalse(token3.equals(token1), "token31 are equal"), //$NON-NLS-1$
-      () -> assertFalse(token1.equals(null), "token10 is equal") //$NON-NLS-1$
-    );
+    EqualsVerifier.forClass(Token.class).verify();
    }
 
 
