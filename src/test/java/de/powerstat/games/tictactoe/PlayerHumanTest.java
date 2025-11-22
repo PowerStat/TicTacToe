@@ -52,7 +52,7 @@ final class PlayerHumanTest
     final var scan = new Scanner(System.in, StandardCharsets.US_ASCII);
     assertThrows(IllegalArgumentException.class, () ->
      {
-      final PlayerHuman player = new PlayerHuman("Test", token, scan);
+      /* final PlayerHuman player = */ new PlayerHuman("Test", token, scan);
      }, "Illegal argument exception"
     );
    }

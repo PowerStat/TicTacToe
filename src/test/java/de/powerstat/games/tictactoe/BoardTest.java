@@ -4,10 +4,8 @@
 package de.powerstat.games.tictactoe;
 
 
-import static org.junit.jupiter.api.Assertions.assertAll;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -21,12 +19,6 @@ import nl.jqno.equalsverifier.*;
  */
 final class BoardTest
  {
-  /**
-   * Comma text.
-   */
-  private static final String COMMA = ", ";
-
-
   /**
    * Default constructor.
    */
@@ -424,7 +416,7 @@ final class BoardTest
    * Equalsverifier.
    */
   @Test
-  public void equalsContract()
+  /* default */ void testEqualsContract()
    {
     EqualsVerifier.forClass(Board.class).withNonnullFields("history").withIgnoredFields("history").verify();
    }

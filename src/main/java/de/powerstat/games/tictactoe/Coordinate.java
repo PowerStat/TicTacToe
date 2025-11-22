@@ -14,6 +14,7 @@ import java.util.Objects;
  *
  * TODO size, width/height
  * TODO Factory
+ * TODO record
  */
 public final class Coordinate implements Comparable<Coordinate>
  {
@@ -57,7 +58,7 @@ public final class Coordinate implements Comparable<Coordinate>
    */
   public int getRow()
    {
-    return this.row;
+    return row;
    }
 
 
@@ -68,7 +69,7 @@ public final class Coordinate implements Comparable<Coordinate>
    */
   public int getColumn()
    {
-    return this.column;
+    return column;
    }
 
 
@@ -81,7 +82,7 @@ public final class Coordinate implements Comparable<Coordinate>
   @Override
   public int hashCode()
    {
-    return Objects.hash(this.row, this.column);
+    return Objects.hash(row, column);
    }
 
 
@@ -99,12 +100,11 @@ public final class Coordinate implements Comparable<Coordinate>
      {
       return true;
      }
-    if (!(obj instanceof Coordinate))
+    if (!(obj instanceof final Coordinate other))
      {
       return false;
      }
-    final Coordinate other = (Coordinate)obj;
-    return (this.row == other.row) && (this.column == other.column);
+    return (row == other.row) && (column == other.column);
    }
 
 
@@ -122,7 +122,7 @@ public final class Coordinate implements Comparable<Coordinate>
   public String toString()
    {
     final var builder = new StringBuilder();
-    builder.append("Coordinate[row=").append(this.row).append(", column=").append(this.column).append(']'); //$NON-NLS-1$
+    builder.append("Coordinate[row=").append(row).append(", column=").append(column).append(']'); //$NON-NLS-1$
     return builder.toString();
    }
 
@@ -138,10 +138,10 @@ public final class Coordinate implements Comparable<Coordinate>
   public int compareTo(final Coordinate obj)
    {
     Objects.requireNonNull(obj, "obj"); //$NON-NLS-1$
-    int result = Integer.compare(this.row, obj.row);
+    int result = Integer.compare(row, obj.row);
     if (result == 0)
      {
-      result = Integer.compare(this.column, obj.column);
+      result = Integer.compare(column, obj.column);
      }
     return result;
    }

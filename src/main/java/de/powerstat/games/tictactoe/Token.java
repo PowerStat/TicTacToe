@@ -73,7 +73,7 @@ public final class Token implements Comparable<Token>
    */
   public char charValue()
    {
-    return this.token;
+    return token;
    }
 
 
@@ -84,7 +84,7 @@ public final class Token implements Comparable<Token>
    */
   public String stringValue()
    {
-    return String.valueOf(this.token);
+    return String.valueOf(token);
    }
 
 
@@ -95,15 +95,12 @@ public final class Token implements Comparable<Token>
    */
   public Token getOppositeToken()
    {
-    switch (this.token)
+    return switch (token)
      {
-      case 'X':
-        return Token.of('O');
-      case 'O':
-        return Token.of('X');
-      default:
-        return Token.of(' ');
-     }
+      case 'X' -> Token.of('O');
+      case 'O' -> Token.of('X');
+      default ->Token.of(' ');
+     };
    }
 
 
@@ -116,7 +113,7 @@ public final class Token implements Comparable<Token>
   @Override
   public int hashCode()
    {
-    return Character.hashCode(this.token);
+    return Character.hashCode(token);
    }
 
 
@@ -134,12 +131,11 @@ public final class Token implements Comparable<Token>
      {
       return true;
      }
-    if (!(obj instanceof Token))
+    if (!(obj instanceof final Token other))
      {
       return false;
      }
-    final Token other = (Token)obj;
-    return (this.token == other.token);
+    return (token == other.token);
    }
 
 
@@ -157,7 +153,7 @@ public final class Token implements Comparable<Token>
   public String toString()
    {
     final var builder = new StringBuilder();
-    builder.append("Token[token=").append(this.token).append(']'); //$NON-NLS-1$
+    builder.append("Token[token=").append(token).append(']'); //$NON-NLS-1$
     return builder.toString();
    }
 
@@ -173,7 +169,7 @@ public final class Token implements Comparable<Token>
   public int compareTo(final Token obj)
    {
     Objects.requireNonNull(obj, "obj"); //$NON-NLS-1$
-    return Character.compare(this.token, obj.token);
+    return Character.compare(token, obj.token);
    }
 
  }

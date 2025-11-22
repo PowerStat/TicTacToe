@@ -46,7 +46,7 @@ final class PlayerAITest
     final Token token = Token.of(' ');
     assertThrows(IllegalArgumentException.class, () ->
      {
-      final PlayerAI player = new PlayerAI("Test", token);
+      /* final PlayerAI player = */ new PlayerAI("Test", token);
      }, "Illegal argument exception"
     );
    }

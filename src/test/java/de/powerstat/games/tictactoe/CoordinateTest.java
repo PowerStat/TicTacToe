@@ -6,8 +6,6 @@ package de.powerstat.games.tictactoe;
 
 import static org.junit.jupiter.api.Assertions.assertAll;
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -49,7 +47,7 @@ final class CoordinateTest
    {
     assertThrows(IllegalArgumentException.class, () ->
      {
-      final Coordinate position = new Coordinate('D', 1);
+      /* final Coordinate position = */ new Coordinate('D', 1);
      }, "Illegal argument exception"
     );
    }
@@ -63,7 +61,7 @@ final class CoordinateTest
    {
     assertThrows(IllegalArgumentException.class, () ->
      {
-      final Coordinate position = new Coordinate('A', 0);
+      /* final Coordinate position = */ new Coordinate('A', 0);
      }, "Illegal argument exception"
     );
    }
@@ -73,7 +71,7 @@ final class CoordinateTest
    * Equalsverifier.
    */
   @Test
-  public void equalsContract()
+  /* default */ void testEqualsContract()
    {
     EqualsVerifier.forClass(Coordinate.class).verify();
    }

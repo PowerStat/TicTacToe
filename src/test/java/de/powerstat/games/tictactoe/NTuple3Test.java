@@ -4,12 +4,8 @@
 package de.powerstat.games.tictactoe;
 
 
-import static org.junit.jupiter.api.Assertions.assertAll;
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
-import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.time.LocalDateTime;
 
@@ -91,7 +87,7 @@ final class NTuple3Test
    * Equalsverifier.
    */
   @Test
-  public void equalsContract()
+  /* default */ void testEqualsContract()
    {
     EqualsVerifier.forClass(NTuple3.class).withNonnullFields("object1", "object2", "object3").verify();
    }

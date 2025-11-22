@@ -6,8 +6,6 @@ package de.powerstat.games.tictactoe;
 
 import static org.junit.jupiter.api.Assertions.assertAll;
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -49,7 +47,7 @@ final class TokenTest
    {
     assertThrows(IllegalArgumentException.class, () ->
      {
-      final Token token = Token.of('A');
+      /* final Token token = */ Token.of('A');
      }, "Illegal argument exception"
     );
    }
@@ -74,7 +72,7 @@ final class TokenTest
    {
     assertThrows(NullPointerException.class, () ->
      {
-      final Token token = Token.of(null);
+      /* final Token token = */ Token.of(null);
      }, "Null pointer exception"
     );
    }
@@ -88,7 +86,7 @@ final class TokenTest
    {
     assertThrows(IllegalArgumentException.class, () ->
      {
-      final Token token = Token.of("XX");
+      /* final Token token = */ Token.of("XX");
      }, "Illegal argument exception"
     );
    }
@@ -120,7 +118,7 @@ final class TokenTest
    * Equalsverifier.
    */
   @Test
-  public void equalsContract()
+  /* default */ void testEqualsContract()
    {
     EqualsVerifier.forClass(Token.class).verify();
    }
