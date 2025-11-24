@@ -1,5 +1,6 @@
 /*
  * Copyright (C) 2023-2025 Dipl.-Inform. Kai Hofmann. All rights reserved!
+ * Licensed to the Apache Software Foundation (ASF) under one or more contributor license agreements; and to You under the Apache License, Version 2.0.
  */
 package de.powerstat.games.tictactoe;
 
@@ -49,7 +50,7 @@ public final class Board
    */
   public void clear()
    {
-    for (final Token[] row : this.board)
+    for (final Token[] row : board)
      {
       for (Token column : row) // TODO Column not writable
        {
@@ -84,7 +85,7 @@ public final class Board
    */
   public Token[][] getBoard()
    {
-    return cloneArray(this.board);
+    return cloneArray(board);
    }
 
 
@@ -98,7 +99,7 @@ public final class Board
    {
     final int row = position.getRow() - 1;
     final int column = position.getColumn() - 1;
-    return this.board[row][column];
+    return board[row][column];
    }
 
 
@@ -132,8 +133,8 @@ public final class Board
      {
       final int row = position.getRow() - 1;
       final int column = position.getColumn() - 1;
-      this.board[row][column] = token;
-      this.history.makeEntry(position, token);
+      board[row][column] = token;
+      history.makeEntry(position, token);
       return true;
      }
     return false;
@@ -148,7 +149,7 @@ public final class Board
   public boolean detectWin()
    {
     // Horizontal 3 rows
-    for (final Token[] row : this.board)
+    for (final Token[] row : board)
      {
       if ((!Token.of(' ').equals(row[0])) && (row[0].equals(row[1])) && (row[0].equals(row[2])))
        {
@@ -158,13 +159,13 @@ public final class Board
     // Vertical 3 columns
     for (int col = 0; col < 3; ++col)
      {
-      if ((!Token.of(' ').equals(this.board[0][col])) && (this.board[0][col].equals(this.board[1][col])) && (this.board[0][col].equals(this.board[2][col])))
+      if ((!Token.of(' ').equals(board[0][col])) && (board[0][col].equals(board[1][col])) && (board[0][col].equals(board[2][col])))
        {
         return true;
        }
      }
     // Diagonal 3 diagonal
-    if (((!Token.of(' ').equals(this.board[0][0])) && (this.board[0][0].equals(this.board[1][1])) && (this.board[0][0].equals(this.board[2][2]))) || ((!Token.of(' ').equals(this.board[0][2])) && (this.board[0][2].equals(this.board[1][1])) && (this.board[0][2].equals(this.board[2][0]))))
+    if (((!Token.of(' ').equals(board[0][0])) && (board[0][0].equals(board[1][1])) && (board[0][0].equals(board[2][2]))) || ((!Token.of(' ').equals(board[0][2])) && (board[0][2].equals(board[1][1])) && (board[0][2].equals(board[2][0]))))
      {
       return true;
      }
@@ -182,7 +183,7 @@ public final class Board
    */
   private int rowColumnChance(final Token token, final int row, final int column)
    {
-    final var fieldToken = this.board[row][column];
+    final var fieldToken = board[row][column];
     if (Token.of(' ').equals(fieldToken))
      {
       return 1;
@@ -322,7 +323,7 @@ public final class Board
   @Override
   public int hashCode()
    {
-    return Arrays.deepHashCode(this.board);
+    return Arrays.deepHashCode(board);
    }
 
 
@@ -344,7 +345,7 @@ public final class Board
      {
       return false;
      }
-    return Arrays.deepEquals(this.board, other.board);
+    return Arrays.deepEquals(board, other.board);
    }
 
 
@@ -378,7 +379,7 @@ public final class Board
     builder.append("  1 2 3\n"); // TODO Iterator CoordinteSystem columns
     builder.append("-------\n");
     int rowNr = 1;
-    for (final Token[] row : this.board)
+    for (final Token[] row : board)
      {
       builder.append((rowNr == 1) ? 'A' : (rowNr == 2 ? 'B' : 'C')); // TODO Iterator CoordinteSystem rows
       builder.append('|');

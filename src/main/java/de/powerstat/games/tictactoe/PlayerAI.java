@@ -1,5 +1,6 @@
 /*
- * Copyright (C) 2023 Dipl.-Inform. Kai Hofmann. All rights reserved!
+ * Copyright (C) 2023-2025 Dipl.-Inform. Kai Hofmann. All rights reserved!
+ * Licensed to the Apache Software Foundation (ASF) under one or more contributor license agreements; and to You under the Apache License, Version 2.0.
  */
 package de.powerstat.games.tictactoe;
 
@@ -157,7 +158,7 @@ public final class PlayerAI implements IPlayer
   @Override
   public void makeMove(final Board board)
    {
-    final Token oppositeToken = this.token.getOppositeToken();
+    final Token oppositeToken = token.getOppositeToken();
     Entry<Coordinate, Integer> maxEntry = getPositionWithHighestChance(board, oppositeToken);
     Coordinate position = null;
     if (maxEntry != null)
@@ -166,7 +167,7 @@ public final class PlayerAI implements IPlayer
      }
     if ((maxEntry == null) || (maxEntry.getValue().intValue() < 1))
      {
-      maxEntry = getPositionWithHighestChance(board, this.token);
+      maxEntry = getPositionWithHighestChance(board, token);
       if (maxEntry != null)
        {
         position = makeMaxEntryCoordinate(maxEntry);
@@ -178,7 +179,7 @@ public final class PlayerAI implements IPlayer
      }
     if (position != null)
      {
-      /* final boolean result = */ board.placeOnField(position, this.token);
+      /* final boolean result = */ board.placeOnField(position, token);
       // Assume always ok
      }
    }
@@ -192,7 +193,7 @@ public final class PlayerAI implements IPlayer
   @Override
   public String getName()
    {
-    return this.name;
+    return name;
    }
 
  }

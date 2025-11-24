@@ -1,5 +1,6 @@
 /*
- * Copyright (C) 2023 Dipl.-Inform. Kai Hofmann. All rights reserved!
+ * Copyright (C) 2023-2025 Dipl.-Inform. Kai Hofmann. All rights reserved!
+ * Licensed to the Apache Software Foundation (ASF) under one or more contributor license agreements; and to You under the Apache License, Version 2.0.
  */
 package de.powerstat.games.tictactoe;
 
@@ -44,12 +45,12 @@ public class History implements IHistory
     final var now = LocalDateTime.now();
     final NTuple3<LocalDateTime, Coordinate, Token> entry = NTuple3.of(now, position, token);
     int entryNr = 1;
-    final Set<Integer> keys = this.history.keySet();
+    final Set<Integer> keys = history.keySet();
     if (!keys.isEmpty())
      {
       entryNr = Collections.max(keys).intValue() + 1;
      }
-    this.history.put(entryNr, entry);
+    history.put(entryNr, entry);
    }
 
  }
