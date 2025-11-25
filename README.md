@@ -85,9 +85,9 @@ If you use [infer][https://fbinfer.com/]:
 
     infer run -- mvn clean compile
 
-To create a spdx:
+Apache-rat:
 
-    mvn spdx:createSPDX
+     mvn apache-rat:check
 
 To create a cycloneDX:
 
