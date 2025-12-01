@@ -151,7 +151,7 @@ public final class Board
     // Horizontal 3 rows
     for (final Token[] row : board)
      {
-      if ((!Token.of(' ').equals(row[0])) && (row[0].equals(row[1])) && (row[0].equals(row[2])))
+      if (!Token.of(' ').equals(row[0]) && row[0].equals(row[1]) && row[0].equals(row[2]))
        {
         return true;
        }
@@ -159,13 +159,13 @@ public final class Board
     // Vertical 3 columns
     for (int col = 0; col < 3; ++col)
      {
-      if ((!Token.of(' ').equals(board[0][col])) && (board[0][col].equals(board[1][col])) && (board[0][col].equals(board[2][col])))
+      if (!Token.of(' ').equals(board[0][col]) && board[0][col].equals(board[1][col]) && board[0][col].equals(board[2][col]))
        {
         return true;
        }
      }
     // Diagonal 3 diagonal
-    if (((!Token.of(' ').equals(board[0][0])) && (board[0][0].equals(board[1][1])) && (board[0][0].equals(board[2][2]))) || ((!Token.of(' ').equals(board[0][2])) && (board[0][2].equals(board[1][1])) && (board[0][2].equals(board[2][0]))))
+    if ((!Token.of(' ').equals(board[0][0]) && board[0][0].equals(board[1][1]) && board[0][0].equals(board[2][2])) || (!Token.of(' ').equals(board[0][2]) && board[0][2].equals(board[1][1]) && board[0][2].equals(board[2][0])))
      {
       return true;
      }

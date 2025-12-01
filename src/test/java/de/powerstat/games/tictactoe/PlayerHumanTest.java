@@ -68,7 +68,7 @@ final class PlayerHumanTest
     final IHistory history = new History();
     final Board board = new Board(history);
     final Token token = Token.of('X');
-    System.setIn(new ByteArrayInputStream("B2".getBytes()));
+    System.setIn(new ByteArrayInputStream("B2".getBytes(StandardCharsets.UTF_8)));
     final var scan = new Scanner(System.in, StandardCharsets.US_ASCII);
     final PlayerHuman player = new PlayerHuman("Test", token, scan);
     player.makeMove(board);
@@ -86,7 +86,7 @@ final class PlayerHumanTest
     final IHistory history = new History();
     final Board board = new Board(history);
     final Token token = Token.of('X');
-    System.setIn(new ByteArrayInputStream("A\nD1\nA4\nB2\n".getBytes()));
+    System.setIn(new ByteArrayInputStream("A\nD1\nA4\nB2\n".getBytes(StandardCharsets.UTF_8)));
     final var scan = new Scanner(System.in, StandardCharsets.US_ASCII);
     final PlayerHuman player = new PlayerHuman("Test", token, scan);
     player.makeMove(board);

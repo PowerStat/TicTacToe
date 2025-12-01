@@ -9,6 +9,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 import java.time.LocalDateTime;
+import java.time.ZoneId;
 
 import org.junit.jupiter.api.Test;
 import nl.jqno.equalsverifier.*;
@@ -34,7 +35,7 @@ final class NTuple3Test
   @Test
   /* default */ void testOf1()
    {
-    final LocalDateTime now = LocalDateTime.now();
+    final LocalDateTime now = LocalDateTime.now(ZoneId.systemDefault());
     final Coordinate position = new Coordinate('A', 1);
     final Token token = Token.of('X');
     final NTuple3<LocalDateTime, Coordinate, Token> ntuple = NTuple3.of(now, position, token);
@@ -48,7 +49,7 @@ final class NTuple3Test
   @Test
   /* default */ void testT1Value()
    {
-    final LocalDateTime now = LocalDateTime.now();
+    final LocalDateTime now = LocalDateTime.now(ZoneId.systemDefault());
     final Coordinate position = new Coordinate('A', 1);
     final Token token = Token.of('X');
     final NTuple3<LocalDateTime, Coordinate, Token> ntuple = NTuple3.of(now, position, token);
@@ -62,7 +63,7 @@ final class NTuple3Test
   @Test
   /* default */ void testT2Value()
    {
-    final LocalDateTime now = LocalDateTime.now();
+    final LocalDateTime now = LocalDateTime.now(ZoneId.systemDefault());
     final Coordinate position = new Coordinate('A', 1);
     final Token token = Token.of('X');
     final NTuple3<LocalDateTime, Coordinate, Token> ntuple = NTuple3.of(now, position, token);
@@ -76,7 +77,7 @@ final class NTuple3Test
   @Test
   /* default */ void testT3Value()
    {
-    final LocalDateTime now = LocalDateTime.now();
+    final LocalDateTime now = LocalDateTime.now(ZoneId.systemDefault());
     final Coordinate position = new Coordinate('A', 1);
     final Token token = Token.of('X');
     final NTuple3<LocalDateTime, Coordinate, Token> ntuple = NTuple3.of(now, position, token);
@@ -100,7 +101,7 @@ final class NTuple3Test
   @Test
   /* default */ void testToString()
    {
-    final LocalDateTime now = LocalDateTime.now();
+    final LocalDateTime now = LocalDateTime.now(ZoneId.systemDefault());
     final Coordinate position = new Coordinate('A', 1);
     final Token token = Token.of('X');
     final NTuple3<LocalDateTime, Coordinate, Token> ntuple = NTuple3.of(now, position, token);

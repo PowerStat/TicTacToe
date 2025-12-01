@@ -6,6 +6,7 @@ package de.powerstat.games.tictactoe;
 
 
 import java.time.LocalDateTime;
+import java.time.ZoneId;
 import java.util.Collections;
 import java.util.Map;
 import java.util.Set;
@@ -42,7 +43,7 @@ public class History implements IHistory
   @Override
   public void makeEntry(final Coordinate position, final Token token)
    {
-    final var now = LocalDateTime.now();
+    final var now = LocalDateTime.now(ZoneId.systemDefault());
     final NTuple3<LocalDateTime, Coordinate, Token> entry = NTuple3.of(now, position, token);
     int entryNr = 1;
     final Set<Integer> keys = history.keySet();
