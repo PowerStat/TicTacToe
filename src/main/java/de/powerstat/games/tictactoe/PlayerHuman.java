@@ -8,6 +8,8 @@ package de.powerstat.games.tictactoe;
 import java.util.Objects;
 import java.util.Scanner;
 
+import org.jmolecules.ddd.annotation.ValueObject;
+
 
 /**
  * Human player.
@@ -16,6 +18,7 @@ import java.util.Scanner;
  * equals
  * toString
  */
+@ValueObject
 public final class PlayerHuman implements IPlayer
  {
   /**

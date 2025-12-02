@@ -8,6 +8,7 @@ package de.powerstat.games.tictactoe;
 import java.util.Objects;
 
 import org.checkerframework.checker.nullness.qual.Nullable;
+import org.jmolecules.ddd.annotation.ValueObject;
 
 
 /**
@@ -19,6 +20,7 @@ import org.checkerframework.checker.nullness.qual.Nullable;
  * TODO Factory
  * TODO record
  */
+@ValueObject
 public final class Coordinate implements Comparable<Coordinate>
  {
   /**

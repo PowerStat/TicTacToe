@@ -11,6 +11,7 @@ import java.util.Objects;
 import java.util.concurrent.ConcurrentHashMap;
 
 import org.checkerframework.checker.nullness.qual.Nullable;
+import org.jmolecules.ddd.annotation.ValueObject;
 
 
 /**
@@ -20,6 +21,7 @@ import org.checkerframework.checker.nullness.qual.Nullable;
  * equals
  * toString
  */
+@ValueObject
 public final class PlayerAI implements IPlayer
  {
   /**

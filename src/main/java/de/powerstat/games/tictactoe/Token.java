@@ -8,12 +8,14 @@ package de.powerstat.games.tictactoe;
 import java.util.Objects;
 
 import org.checkerframework.checker.nullness.qual.Nullable;
+import org.jmolecules.ddd.annotation.ValueObject;
 
 
 /**
  * Players token.
  */
 @SuppressWarnings("PMD.AvoidFieldNameMatchingTypeName")
+@ValueObject
 public final class Token implements Comparable<Token>
  {
   /**

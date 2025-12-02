@@ -9,6 +9,7 @@ import java.util.Arrays;
 import java.util.Objects;
 
 import org.checkerframework.checker.nullness.qual.Nullable;
+import org.jmolecules.ddd.annotation.Entity;
 
 
 /**
@@ -19,6 +20,7 @@ import org.checkerframework.checker.nullness.qual.Nullable;
  * TODO Factory
  */
 @SuppressWarnings("PMD.AvoidFieldNameMatchingTypeName")
+@Entity
 public final class Board
  {
   /**
