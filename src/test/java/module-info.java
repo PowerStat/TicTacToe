@@ -15,6 +15,7 @@ open module de.powerstat.games.tictactoe
   // requires java.nio;
 
   requires org.apache.logging.log4j;
+  requires org.checkerframework.checker.qual;
 
   requires com.github.spotbugs.annotations;
   requires org.junit.jupiter.api;

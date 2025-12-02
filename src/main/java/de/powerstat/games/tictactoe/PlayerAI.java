@@ -10,6 +10,8 @@ import java.util.Map.Entry;
 import java.util.Objects;
 import java.util.concurrent.ConcurrentHashMap;
 
+import org.checkerframework.checker.nullness.qual.Nullable;
+
 
 /**
  * Artificial intelligence player.
@@ -98,9 +100,9 @@ public final class PlayerAI implements IPlayer
    *
    * @param board Board
    * @param token Players token
-   * @return Max entry
+   * @return Max entry or null
    */
-  private static Entry<Coordinate, Integer> getPositionWithHighestChance(final Board board, final Token token)
+  private static @Nullable Entry<Coordinate, Integer> getPositionWithHighestChance(final Board board, final Token token)
    {
     final Map<Coordinate, Integer> chances = new ConcurrentHashMap<>();
     for (char row = 'A'; row <= 'C'; ++row)
@@ -133,7 +135,7 @@ public final class PlayerAI implements IPlayer
    * @param board Board
    * @return Coordinate or null if no free position is available
    */
-  private static Coordinate getFirstFreePosition(final Board board)
+  private static @Nullable Coordinate getFirstFreePosition(final Board board)
    {
     for (char row = 'A'; row <= 'C'; ++row)
      {

@@ -7,6 +7,8 @@ package de.powerstat.games.tictactoe;
 
 import java.util.Objects;
 
+import org.checkerframework.checker.nullness.qual.Nullable;
+
 
 /**
  * Board coordinate system.
@@ -95,7 +97,7 @@ public final class Coordinate implements Comparable<Coordinate>
    * @see java.lang.Object#equals(java.lang.Object)
    */
   @Override
-  public boolean equals(final Object obj)
+  public boolean equals(final @Nullable Object obj)
    {
     if (this == obj)
      {

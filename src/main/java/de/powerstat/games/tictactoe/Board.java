@@ -8,6 +8,8 @@ package de.powerstat.games.tictactoe;
 import java.util.Arrays;
 import java.util.Objects;
 
+import org.checkerframework.checker.nullness.qual.Nullable;
+
 
 /**
  * Game board 3x3.
@@ -335,7 +337,7 @@ public final class Board
    * @see java.lang.Object#equals(java.lang.Object)
    */
   @Override
-  public boolean equals(final Object obj)
+  public boolean equals(final @Nullable Object obj)
    {
     if (this == obj)
      {

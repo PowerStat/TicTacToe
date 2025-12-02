@@ -68,6 +68,10 @@ To run spotbugs:
 To run errorprone:
 
     mvn -Perrorprone clean test -DSkipTests
+    
+To run checkerframework:
+
+    mvn -Pcheckerframework clean test -DskipTests
 
 To run arch-unit:
 

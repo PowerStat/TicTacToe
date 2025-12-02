@@ -15,5 +15,6 @@ module de.powerstat.games.tictactoe
   // requires java.nio;
 
   requires org.apache.logging.log4j;
+  requires org.checkerframework.checker.qual;
 
  }

@@ -7,6 +7,8 @@ package de.powerstat.games.tictactoe;
 
 import java.util.Objects;
 
+import org.checkerframework.checker.nullness.qual.Nullable;
+
 
 /**
  * N-Tuple 3.
@@ -130,7 +132,7 @@ public final class NTuple3<T1, T2, T3>
    * @see java.lang.Object#equals(java.lang.Object)
    */
   @Override
-  public boolean equals(final Object obj)
+  public boolean equals(final @Nullable Object obj)
    {
     if (this == obj)
      {
