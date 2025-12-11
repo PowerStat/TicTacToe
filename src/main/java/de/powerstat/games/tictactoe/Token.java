@@ -7,23 +7,18 @@ package de.powerstat.games.tictactoe;
 
 import java.util.Objects;
 
-import org.checkerframework.checker.nullness.qual.Nullable;
 import org.jmolecules.ddd.annotation.ValueObject;
 
 
 /**
  * Players token.
+ *
+ * @param token Token
  */
 @SuppressWarnings("PMD.AvoidFieldNameMatchingTypeName")
 @ValueObject
-public final class Token implements Comparable<Token>
+public record Token(char token) implements Comparable<Token>
  {
-  /**
-   * Token.
-   */
-  private final char token;
-
-
   /**
    * Constructor.
    *
@@ -31,14 +26,12 @@ public final class Token implements Comparable<Token>
    * @throws NullPointerException if token is null
    * @throws IllegalArgumentException if token is not a correct token
    */
-  private Token(final char token)
+  public Token
    {
-    super();
     if ((token != 'X') && (token != 'O') && (token != ' '))
      {
       throw new IllegalArgumentException("Token with wrong format"); //$NON-NLS-1$
      }
-    this.token = token;
    }
 
 
@@ -72,17 +65,6 @@ public final class Token implements Comparable<Token>
 
 
   /**
-   * Returns the value of this Token as a char.
-   *
-   * @return The character value represented by this object after conversion to type char.
-   */
-  public char charValue()
-   {
-    return token;
-   }
-
-
-  /**
    * Returns the value of this Token as a string.
    *
    * @return The character value represented by this object after conversion to type string.
@@ -106,60 +88,6 @@ public final class Token implements Comparable<Token>
       case 'O' -> Token.of('X');
       default ->Token.of(' ');
      };
-   }
-
-
-  /**
-   * Calculate hash code.
-   *
-   * @return Hash
-   * @see java.lang.Object#hashCode()
-   */
-  @Override
-  public int hashCode()
-   {
-    return Character.hashCode(token);
-   }
-
-
-  /**
-   * Is equal with another object.
-   *
-   * @param obj Object
-   * @return true when equal, false otherwise
-   * @see java.lang.Object#equals(java.lang.Object)
-   */
-  @Override
-  public boolean equals(final @Nullable Object obj)
-   {
-    if (this == obj)
-     {
-      return true;
-     }
-    if (!(obj instanceof final Token other))
-     {
-      return false;
-     }
-    return (token == other.token);
-   }
-
-
-  /**
-   * Returns the string representation of this Token.
-   *
-   * The exact details of this representation are unspecified and subject to change, but the following may be regarded as typical:
-   *
-   * "Token[token=X]"
-   *
-   * @return String representation of this Token
-   * @see java.lang.Object#toString()
-   */
-  @Override
-  public String toString()
-   {
-    final var builder = new StringBuilder();
-    builder.append("Token[token=").append(token).append(']'); //$NON-NLS-1$
-    return builder.toString();
    }
 
 

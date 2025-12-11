@@ -85,11 +85,9 @@
         <version>3.5.1</version>
         <configuration>        
           <mainClass>${mainClass}</mainClass>
-          <!--
           <arguments>
-            <argument>YourName</argument>
+            <argument>1</argument>
           </arguments>
-          -->
         </configuration>
       </plugin>
 

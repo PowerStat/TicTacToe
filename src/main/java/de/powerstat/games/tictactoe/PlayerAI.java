@@ -17,24 +17,12 @@ import org.jmolecules.ddd.annotation.ValueObject;
 /**
  * Artificial intelligence player.
  *
- * hashCode
- * equals
- * toString
+ * @param name Player name
+ * @param token Token X/O
  */
 @ValueObject
-public final class PlayerAI implements IPlayer
+public record PlayerAI(String name, Token token) implements IPlayer
  {
-  /**
-   * Player name.
-   */
-  private final String name;
-
-  /**
-   * Token.
-   */
-  private final Token token;
-
-
   /**
    * Constructor.
    *
@@ -42,18 +30,15 @@ public final class PlayerAI implements IPlayer
    * @param token Token X/O
    * @throws IllegalArgumentException If token is not X or O
    */
-  public PlayerAI(final String name, final Token token)
+  public PlayerAI
    {
-    super();
     Objects.requireNonNull(name, "name"); //$NON-NLS-1$
     // Max length
     // Regexp
-    if ((token.charValue() != 'X') && (token.charValue() != 'O'))
+    if ((token.token() != 'X') && (token.token() != 'O'))
      {
       throw new IllegalArgumentException("Token must be X or O");
      }
-    this.name = name;
-    this.token = token;
    }
 
 
@@ -67,7 +52,7 @@ public final class PlayerAI implements IPlayer
    {
     final char[] arr = {'A', 'B', 'C'};
     final char row = arr[maxEntry.getKey().getRow() - 1];
-    final int column = maxEntry.getKey().getColumn();
+    final int column = maxEntry.getKey().column();
     return new Coordinate(row, column);
    }
 

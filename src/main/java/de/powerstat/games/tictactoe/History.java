@@ -22,7 +22,7 @@ public class History implements IHistory
   /**
    * History map.
    */
-  private final Map<Integer, NTuple3<LocalDateTime, Coordinate, Token>> history = new ConcurrentHashMap<>();
+  private final Map<Integer, NTuple3nc<LocalDateTime, Coordinate, Token>> history = new ConcurrentHashMap<>();
 
 
   /**
@@ -44,7 +44,7 @@ public class History implements IHistory
   public void makeEntry(final Coordinate position, final Token token)
    {
     final var now = LocalDateTime.now(ZoneId.systemDefault());
-    final NTuple3<LocalDateTime, Coordinate, Token> entry = NTuple3.of(now, position, token);
+    final NTuple3nc<LocalDateTime, Coordinate, Token> entry = NTuple3nc.of(now, position, token);
     int entryNr = 1;
     final Set<Integer> keys = history.keySet();
     if (!keys.isEmpty())

@@ -14,29 +14,13 @@ import org.jmolecules.ddd.annotation.ValueObject;
 /**
  * Human player.
  *
- * hashCode
- * equals
- * toString
+ * @param name Player name
+ * @param token Token X/O
+ * @param scan Scanner
  */
 @ValueObject
-public final class PlayerHuman implements IPlayer
+public record PlayerHuman(String name, Token token, Scanner scan) implements IPlayer
  {
-  /**
-   * Player name.
-   */
-  private final String name;
-
-  /**
-   * Token.
-   */
-  private final Token token;
-
-  /**
-   * Scanner.
-   */
-  private final Scanner scan;
-
-
   /**
    * Constructor.
    *
@@ -45,20 +29,16 @@ public final class PlayerHuman implements IPlayer
    * @param scan Scanner
    * @throws IllegalArgumentException when token is not X or O
    */
-  public PlayerHuman(final String name, final Token token, final Scanner scan)
+  public PlayerHuman
    {
-    super();
     Objects.requireNonNull(name, "name"); //$NON-NLS-1$
     Objects.requireNonNull(scan, "scan"); //$NON-NLS-1$
     // Max length
     // Regexp
-    if ((token.charValue() != 'X') && (token.charValue() != 'O'))
+    if ((token.token() != 'X') && (token.token() != 'O'))
      {
       throw new IllegalArgumentException("Token must be X or O");
      }
-    this.name = name;
-    this.token = token;
-    this.scan = scan;
    }
 
 

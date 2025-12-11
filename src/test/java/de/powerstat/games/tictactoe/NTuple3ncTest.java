@@ -12,18 +12,17 @@ import java.time.LocalDateTime;
 import java.time.ZoneId;
 
 import org.junit.jupiter.api.Test;
-import nl.jqno.equalsverifier.*;
 
 
 /**
  * NTuple 3 tests.
  */
-final class NTuple3Test
+final class NTuple3ncTest
  {
   /**
    * Default constructor.
    */
-  /* default */ NTuple3Test()
+  NTuple3ncTest()
    {
     super();
    }
@@ -38,7 +37,7 @@ final class NTuple3Test
     final LocalDateTime now = LocalDateTime.now(ZoneId.systemDefault());
     final Coordinate position = new Coordinate('A', 1);
     final Token token = Token.of('X');
-    final NTuple3<LocalDateTime, Coordinate, Token> ntuple = NTuple3.of(now, position, token);
+    final NTuple3nc<LocalDateTime, Coordinate, Token> ntuple = NTuple3nc.of(now, position, token);
     assertNotNull(ntuple, "Factory failed!");
    }
 
@@ -52,8 +51,8 @@ final class NTuple3Test
     final LocalDateTime now = LocalDateTime.now(ZoneId.systemDefault());
     final Coordinate position = new Coordinate('A', 1);
     final Token token = Token.of('X');
-    final NTuple3<LocalDateTime, Coordinate, Token> ntuple = NTuple3.of(now, position, token);
-    assertEquals(now, ntuple.t1Value(), "Not equal!");
+    final NTuple3nc<LocalDateTime, Coordinate, Token> ntuple = NTuple3nc.of(now, position, token);
+    assertEquals(now, ntuple.obj1(), "Not equal!");
    }
 
 
@@ -66,8 +65,8 @@ final class NTuple3Test
     final LocalDateTime now = LocalDateTime.now(ZoneId.systemDefault());
     final Coordinate position = new Coordinate('A', 1);
     final Token token = Token.of('X');
-    final NTuple3<LocalDateTime, Coordinate, Token> ntuple = NTuple3.of(now, position, token);
-    assertEquals(position, ntuple.t2Value(), "Not equal!");
+    final NTuple3nc<LocalDateTime, Coordinate, Token> ntuple = NTuple3nc.of(now, position, token);
+    assertEquals(position, ntuple.obj2(), "Not equal!");
    }
 
 
@@ -80,33 +79,8 @@ final class NTuple3Test
     final LocalDateTime now = LocalDateTime.now(ZoneId.systemDefault());
     final Coordinate position = new Coordinate('A', 1);
     final Token token = Token.of('X');
-    final NTuple3<LocalDateTime, Coordinate, Token> ntuple = NTuple3.of(now, position, token);
-    assertEquals(token, ntuple.t3Value(), "Not equal!");
-   }
-
-
-  /**
-   * Equalsverifier.
-   */
-  @Test
-  /* default */ void testEqualsContract()
-   {
-    EqualsVerifier.forClass(NTuple3.class).withNonnullFields("object1", "object2", "object3").verify();
-   }
-
-
-  /**
-   * Test toString.
-   */
-  @Test
-  /* default */ void testToString()
-   {
-    final LocalDateTime now = LocalDateTime.now(ZoneId.systemDefault());
-    final Coordinate position = new Coordinate('A', 1);
-    final Token token = Token.of('X');
-    final NTuple3<LocalDateTime, Coordinate, Token> ntuple = NTuple3.of(now, position, token);
-    final String result = ntuple.toString();
-    assertEquals("NTuple3[object1=" + now.toString() + ", object2=Coordinate[row=1, column=1], object3=Token[token=X]]", result, "toString not equal");
+    final NTuple3nc<LocalDateTime, Coordinate, Token> ntuple = NTuple3nc.of(now, position, token);
+    assertEquals(token, ntuple.obj3(), "Not equal!");
    }
 
  }

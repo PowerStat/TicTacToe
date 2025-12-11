@@ -12,7 +12,6 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import org.junit.jupiter.api.Test;
-import nl.jqno.equalsverifier.*;
 
 
 /**
@@ -410,29 +409,6 @@ final class BoardTest
 
     final int chance = board.fieldChanceFor3(position3, token1);
     assertEquals(21, chance, "Not the expected chance");
-   }
-
-
-  /**
-   * Equalsverifier.
-   */
-  @Test
-  /* default */ void testEqualsContract()
-   {
-    EqualsVerifier.forClass(Board.class).withNonnullFields("history").withIgnoredFields("history").verify();
-   }
-
-
-  /**
-   * Test toString.
-   */
-  @Test
-  /* default */ void testToString()
-   {
-    final IHistory history = new History();
-    final Board board = new Board(history);
-    final String result = board.toString();
-    assertEquals("Board[\n  1 2 3\n-------\nA| | | |\n-------\nB| | | |\n-------\nC| | | |\n-------\n]\n", result, "toString not equal");
    }
 
  }

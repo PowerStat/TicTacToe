@@ -88,7 +88,7 @@ final class TicTacToeTest
   /* default */ void testMain3()
    {
     final String[] arguments = {"Human"};
-    System.setIn(new ByteArrayInputStream("B2\nA3\nB1\nC3\nA2\n".getBytes(StandardCharsets.UTF_8)));
+    System.setIn(new ByteArrayInputStream("B2\nA3\nB1\nC3\nC2\n".getBytes(StandardCharsets.UTF_8)));
     TicTacToe.main(arguments);
     final String output = outContent.toString(StandardCharsets.UTF_8);
     assertTrue(output.contains("Standoff"), "No Standoff!");

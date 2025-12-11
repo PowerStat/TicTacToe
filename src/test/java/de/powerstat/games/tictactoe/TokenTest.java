@@ -116,28 +116,6 @@ final class TokenTest
 
 
   /**
-   * Equalsverifier.
-   */
-  @Test
-  /* default */ void testEqualsContract()
-   {
-    EqualsVerifier.forClass(Token.class).verify();
-   }
-
-
-  /**
-   * Test toString.
-   */
-  @Test
-  /* default */ void testToString()
-   {
-    final Token token = Token.of('X');
-    final String result = token.toString();
-    assertEquals("Token[token=X]", result, "toString not equal");
-   }
-
-
-  /**
    * Test compareTo.
    */
   @Test

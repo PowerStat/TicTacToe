@@ -102,7 +102,7 @@ public final class Board
   private Token getToken(final Coordinate position)
    {
     final int row = position.getRow() - 1;
-    final int column = position.getColumn() - 1;
+    final int column = position.column() - 1;
     return board[row][column];
    }
 
@@ -129,14 +129,14 @@ public final class Board
    */
   public boolean placeOnField(final Coordinate position, final Token token)
    {
-    if ((token.charValue() != 'X') && (token.charValue() != 'O'))
+    if ((token.token() != 'X') && (token.token() != 'O'))
      {
       throw new IllegalStateException("Token must be X or O!");
      }
     if (isPositionEmpty(position))
      {
       final int row = position.getRow() - 1;
-      final int column = position.getColumn() - 1;
+      final int column = position.column() - 1;
       board[row][column] = token;
       history.makeEntry(position, token);
       return true;
@@ -309,7 +309,7 @@ public final class Board
      }
     int chance = 0;
     final int row = position.getRow() - 1;
-    final int column = position.getColumn() - 1;
+    final int column = position.column() - 1;
     chance += horizontalChance(token, row);
     chance += verticalChance(token, column);
     chance += diagonalTopLeftToBottomRight(token, row, column);
@@ -389,7 +389,7 @@ public final class Board
       builder.append('|');
       for (final Token column : row)
        {
-        builder.append(column.charValue()).append('|');
+        builder.append(column.token()).append('|');
        }
       builder.append("\n-------\n");
       ++rowNr;

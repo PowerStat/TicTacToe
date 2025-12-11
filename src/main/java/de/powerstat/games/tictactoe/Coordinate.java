@@ -7,42 +7,29 @@ package de.powerstat.games.tictactoe;
 
 import java.util.Objects;
 
-import org.checkerframework.checker.nullness.qual.Nullable;
 import org.jmolecules.ddd.annotation.ValueObject;
 
 
 /**
  * Board coordinate system.
  *
- * Rows A-C, columns 1-3
+ * @param row Row nr 1-3 = A-C.
+ * @param column Column nr 1-3.
  *
  * TODO size, width/height
  * TODO Factory
- * TODO record
  */
 @ValueObject
-public final class Coordinate implements Comparable<Coordinate>
+public record Coordinate(char row, int column) implements Comparable<Coordinate>
  {
-  /**
-   * Row 1-3 = A-C.
-   */
-  private final int row;
-
-  /**
-   * Column 1-3.
-   */
-  private final int column;
-
-
   /**
    * Constructor.
    *
-   * @param row Row nr.
-   * @param column Column nr.
+   * @param row Row nr 1-3 = A-C.
+   * @param column Column nr 1-3.
    */
-  public Coordinate(final char row, final int column)
+  public Coordinate
    {
-    super();
     if ((row != 'A') && (row != 'B') && (row != 'C'))
      {
       throw new IllegalArgumentException("Row is not between A-C");
@@ -51,8 +38,6 @@ public final class Coordinate implements Comparable<Coordinate>
      {
       throw new IllegalArgumentException("Column not between 1-3");
      }
-    this.row = (row - 'A') + 1;
-    this.column = column;
    }
 
 
@@ -63,72 +48,7 @@ public final class Coordinate implements Comparable<Coordinate>
    */
   public int getRow()
    {
-    return row;
-   }
-
-
-  /**
-   * Get column.
-   *
-   * @return Column 1-3
-   */
-  public int getColumn()
-   {
-    return column;
-   }
-
-
-  /**
-   * Calculate hash code.
-   *
-   * @return Hash
-   * @see java.lang.Object#hashCode()
-   */
-  @Override
-  public int hashCode()
-   {
-    return Objects.hash(row, column);
-   }
-
-
-  /**
-   * Is equal with another object.
-   *
-   * @param obj Object
-   * @return true when equal, false otherwise
-   * @see java.lang.Object#equals(java.lang.Object)
-   */
-  @Override
-  public boolean equals(final @Nullable Object obj)
-   {
-    if (this == obj)
-     {
-      return true;
-     }
-    if (!(obj instanceof final Coordinate other))
-     {
-      return false;
-     }
-    return (row == other.row) && (column == other.column);
-   }
-
-
-  /**
-   * Returns the string representation of this Coordinate.
-   *
-   * The exact details of this representation are unspecified and subject to change, but the following may be regarded as typical:
-   *
-   * "Coordinate[row=1, column=1]"
-   *
-   * @return String representation of this Coordinate
-   * @see java.lang.Object#toString()
-   */
-  @Override
-  public String toString()
-   {
-    final var builder = new StringBuilder();
-    builder.append("Coordinate[row=").append(row).append(", column=").append(column).append(']'); //$NON-NLS-1$
-    return builder.toString();
+    return (row - 'A') + 1;
    }
 
 
